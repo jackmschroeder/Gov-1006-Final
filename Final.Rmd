@@ -1,9 +1,15 @@
 ---
-title: "Smith and Martin"
+title: "Final Project"
 author: "Jack Schroeder"
 date: "4/4/2019"
-output: html_document
+output:
+  html_document:
+    df_print: paged
+
+citation_package: natbib
+bibliography: references.bib
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -18,8 +24,6 @@ library(tidyverse)
 # want to limit the libraries called), I read in their csv data in as csv_data.
 
 csv_data <- read_csv("Smith-Martin-Replication-Data/IRELAND-CANDIDATES.csv")
-
-csv_data
 
 ```
 
@@ -66,7 +70,7 @@ csv_data <- csv_data %>%
                              educode == 3 ~ 2,
                              educode == 4 ~ 2,
                              educode == 5 ~ 3,
-                             TRUE ~ educode),
+                             TRUE ~ as.double(educode)),
 
 # The next recode focuses on the Dail term. There had been 32 Dail terms by 2016, but 
 # the current dataset only looks at them as the term number. Since these terms have
@@ -103,85 +107,47 @@ csv_data <- csv_data %>%
                              dail ==  29 ~ 2002,
                              dail ==  30 ~ 2007,
                              dail ==  31 ~ 2011,
-                             dail ==  32 ~ 2016)) %>% 
+                             dail ==  32 ~ 2016),
+
+# Smith and Martin also recode a few partyid values to a new vector named
+# partyidsimple. The changes are minor. Christian Centrists are lumped in with
+# the Christian Solidarity, Sinn Fein's workers' parties are lumped in with
+# the other workers' parties, Independent Fianna Fail and Fine Gael are recoded
+# into their larger counterparts, and some smaller parties are recoded into the
+# value 30, which contains other minor parties and non-parties.
+
+      partyidsimple = case_when(partyid == 9 ~ 8,
+                                partyid == 14 ~ 15,
+                                partyid == 11 ~ 1,
+                                partyid == 12 ~ 2,
+                                partyid == 16 ~ 30,
+                                partyid == 18 ~ 30,
+                                partyid == 23 ~ 30,
+                                partyid == 26 ~ 30,
+                                partyid == 16 ~ 30,
+                                TRUE ~ as.double(partyid))) %>% 
   
 # Lastly, Smith and Martin filter out results from before 1944. This
 # is done to focus on the previous 20 Dails.
   
   filter(elecyear > 1943)
 
+# One more thing need to be taken care of first. There was an Irish 
+# politician named James Dillon. He was an independent associated with
+# the Fine Gael party for most of his career. Smith and Martin go to
+# great lengths to make sure he is coded as FG throughout the entire
+# dataset. This makes enough sense from a cursory glance of his electoral
+# history: he was leader of FG from 1959-1965. I'll indulge the authors and
+# recode him.
 
-
-
-# sort pid cruns
-# by pid: gen first_age = est_age if cwins == 1
-# by pid: egen agefirst = min(first_age)
-# by pid: gen first_party = party if cruns == 1 
-# by pid: replace first_party = first_party[_n-1] if cruns > 1
-# 
-# gen firstrun = 0
-# replace firstrun = 1 if cruns == 1
-# 
-# *** Re-code James Dillon (FG-affiliated indep. who effectively was FG) as FG ***
-# replace party = "FG" if name == "Dillon, James"
-# replace partyid = 2 if name == "Dillon, James"
-# replace govparty = 1 if name == "Dillon, James" & elecyear == 1948
-# 
-# gen partyidsimple = partyid
-# replace partyidsimple = 8 if partyid == 9
-# replace partyidsimple = 15 if partyid == 14
-# replace partyidsimple = 1 if partyid == 11
-# replace partyidsimple = 2 if partyid == 12
-# replace partyidsimple = 30 if partyid == 16
-# replace partyidsimple = 30 if partyid == 18
-# replace partyidsimple = 30 if partyid == 23
-# replace partyidsimple = 30 if partyid == 26
-# replace partyidsimple = 30 if partyid == 16
-# 
-# egen party_year = group(partyidsimple electiondate)
-# egen dist_year = group(districtid electiondate)
-# egen party_dail = group(partyidsimple dail)
-# 
-# sort pid cwins
-# gen prevwins = cwins
-# by pid: replace prevwins = prevwins - 1 if result == 1
-# gen prewins2 = prevwins*prevwins
-# 
-# gen dailyear = 0
-# replace dailyear = 	1918	if dail ==  1
-# replace dailyear = 	1921	if dail ==  2
-# replace dailyear = 	1922	if dail ==  3
-# replace dailyear = 	1923	if dail ==  4
-# replace dailyear = 	1927	if dail ==  5
-# replace dailyear = 	1927	if dail ==  6
-# replace dailyear = 	1932	if dail ==  7
-# replace dailyear = 	1933	if dail ==  8
-# replace dailyear = 	1937	if dail ==  9
-# replace dailyear = 	1938	if dail ==  10
-# replace dailyear = 	1943	if dail ==  11
-# replace dailyear = 	1944	if dail ==  12
-# replace dailyear = 	1948	if dail ==  13
-# replace dailyear = 	1951	if dail ==  14
-# replace dailyear = 	1954	if dail ==  15
-# replace dailyear = 	1957	if dail ==  16
-# replace dailyear = 	1961	if dail ==  17
-# replace dailyear = 	1965	if dail ==  18
-# replace dailyear = 	1969	if dail ==  19
-# replace dailyear = 	1973	if dail ==  20
-# replace dailyear = 	1977	if dail ==  21
-# replace dailyear = 	1981	if dail ==  22
-# replace dailyear = 	1982	if dail ==  23
-# replace dailyear = 	1982	if dail ==  24
-# replace dailyear = 	1987	if dail ==  25
-# replace dailyear = 	1989	if dail ==  26
-# replace dailyear = 	1992	if dail ==  27
-# replace dailyear = 	1997	if dail ==  28
-# replace dailyear = 	2002	if dail ==  29
-# replace dailyear = 	2007	if dail ==  30
-# replace dailyear = 	2011	if dail ==  31
-# replace dailyear = 	2016	if dail ==  32
-# 
-# keep if elecyear > 1943
-
+csv_data <- csv_data %>% 
+  mutate(party = case_when(name == "Dillon, James" ~ "FG",
+                           TRUE ~ party),
+         partyid = case_when(name == "Dillon, James" ~ 2,
+                             TRUE ~ as.double(partyid)),
+         govparty = case_when(name == "Dillon, James" & elecyear == 1948 ~ 1,
+                              TRUE ~ as.double(govparty)))
 
 ```
+
+# References
