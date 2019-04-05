@@ -1,0 +1,187 @@
+---
+title: "Smith and Martin"
+author: "Jack Schroeder"
+date: "4/4/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# I only need tidyverse for the time being. Once I start replicating the figures, I will
+# likely need some other libraries.
+
+library(tidyverse)
+
+# Smith and Martin leave two data files in the Dataverse. Both of them contain the same
+# data. Since I'm more familiar with reading in a csv file versus a dta file (and I
+# want to limit the libraries called), I read in their csv data in as csv_data.
+
+csv_data <- read_csv("Smith-Martin-Replication-Data/IRELAND-CANDIDATES.csv")
+
+csv_data
+
+```
+
+
+```{r data cleaning, echo=FALSE}
+
+# Smith and Martin recode a lot of values before going into their analysis. I am going
+# to translate this part of their work and leave the figures themselves for a later
+# time.
+
+csv_data <- csv_data %>% 
+
+# The first mutate is a scalar value of whether a politician is a legacy. What are these
+# values? pre_mp is equal to 1 if past family members were elected to the Dail
+# (Ireland's) lower house. cablegacy is coded 1 if their direct predecessor served in
+# cabinet. All other values on this scale are equal to 0.
+  
+  mutate(legacyscale = case_when(pre_mp == 1 ~ 1,
+                                 cablegacy == 1 ~ 2,
+                                 TRUE ~ 0),
+  
+# cwins is the number of times (including the current term) the candidate has won
+# election to the Dail. est_age is the estimated age of each candidate (if unknown) or
+# the actual age (which is found in age). This age is taken from when the candidate
+# runs/wins for the first time. Presumably Smith and Martin wanted to see if these
+# numbers are still influential on an exponential scale.
+
+         cwins2 = cwins^2,
+        est_age2 = est_age^2,
+        age2 = age^2,
+
+# Then we have to recode some values already in the dataset into groups. The first is
+# a group of estimated ages. The next is recoding educode to new values. educode refers
+# to the highest degree received. 1 is primary school, 2 is secondary school, 3 is 
+# tertiary, 4 university, and 5 postgraduate. They recode tertiary and university to have
+# the same value in educode2.
+
+        agegroup = case_when(est_age > 29 ~ 1,
+                             est_age > 39 ~ 2,
+                             est_age > 49 ~ 3,
+                             est_age > 59 ~ 4,
+                             TRUE ~ 0),
+        educode2 = case_when(educode == 2 ~ 1,
+                             educode == 3 ~ 2,
+                             educode == 4 ~ 2,
+                             educode == 5 ~ 3,
+                             TRUE ~ educode),
+
+# The next recode focuses on the Dail term. There had been 32 Dail terms by 2016, but 
+# the current dataset only looks at them as the term number. Since these terms have
+# varying lengths, recoding them into years may yield stronger results on legacy.
+
+        dailyear = case_when(dail ==  1 ~ 1918 ,
+                             dail ==  2 ~ 1921,
+                             dail ==  3 ~ 1922,
+                             dail ==  4 ~ 1923,
+                             dail ==  5 ~ 1927,
+                             dail ==  6  ~ 1927,
+                             dail ==  7 ~ 1932,
+                             dail ==  8 ~ 1933,
+                             dail ==  9 ~ 1937,
+                             dail ==  10 ~ 1938,
+                             dail ==  11 ~ 1943,
+                             dail ==  12 ~ 1944,
+                             dail ==  13 ~ 1948,
+                             dail ==  14 ~ 1951,
+                             dail ==  15 ~ 1954,
+                             dail ==  16 ~ 1957,
+                             dail ==  17 ~ 1961,
+                             dail ==  18 ~ 1965,
+                             dail ==  19 ~ 1969,
+                             dail ==  20 ~ 1973,
+                             dail ==  21 ~ 1977,
+                             dail ==  22 ~ 1981,
+                             dail ==  23 ~ 1982,
+                             dail ==  24 ~ 1982,
+                             dail ==  25 ~ 1987,
+                             dail ==  26 ~ 1989,
+                             dail ==  27 ~ 1992,
+                             dail ==  28 ~ 1997,
+                             dail ==  29 ~ 2002,
+                             dail ==  30 ~ 2007,
+                             dail ==  31 ~ 2011,
+                             dail ==  32 ~ 2016)) %>% 
+  
+# Lastly, Smith and Martin filter out results from before 1944. This
+# is done to focus on the previous 20 Dails.
+  
+  filter(elecyear > 1943)
+
+
+
+
+# sort pid cruns
+# by pid: gen first_age = est_age if cwins == 1
+# by pid: egen agefirst = min(first_age)
+# by pid: gen first_party = party if cruns == 1 
+# by pid: replace first_party = first_party[_n-1] if cruns > 1
+# 
+# gen firstrun = 0
+# replace firstrun = 1 if cruns == 1
+# 
+# *** Re-code James Dillon (FG-affiliated indep. who effectively was FG) as FG ***
+# replace party = "FG" if name == "Dillon, James"
+# replace partyid = 2 if name == "Dillon, James"
+# replace govparty = 1 if name == "Dillon, James" & elecyear == 1948
+# 
+# gen partyidsimple = partyid
+# replace partyidsimple = 8 if partyid == 9
+# replace partyidsimple = 15 if partyid == 14
+# replace partyidsimple = 1 if partyid == 11
+# replace partyidsimple = 2 if partyid == 12
+# replace partyidsimple = 30 if partyid == 16
+# replace partyidsimple = 30 if partyid == 18
+# replace partyidsimple = 30 if partyid == 23
+# replace partyidsimple = 30 if partyid == 26
+# replace partyidsimple = 30 if partyid == 16
+# 
+# egen party_year = group(partyidsimple electiondate)
+# egen dist_year = group(districtid electiondate)
+# egen party_dail = group(partyidsimple dail)
+# 
+# sort pid cwins
+# gen prevwins = cwins
+# by pid: replace prevwins = prevwins - 1 if result == 1
+# gen prewins2 = prevwins*prevwins
+# 
+# gen dailyear = 0
+# replace dailyear = 	1918	if dail ==  1
+# replace dailyear = 	1921	if dail ==  2
+# replace dailyear = 	1922	if dail ==  3
+# replace dailyear = 	1923	if dail ==  4
+# replace dailyear = 	1927	if dail ==  5
+# replace dailyear = 	1927	if dail ==  6
+# replace dailyear = 	1932	if dail ==  7
+# replace dailyear = 	1933	if dail ==  8
+# replace dailyear = 	1937	if dail ==  9
+# replace dailyear = 	1938	if dail ==  10
+# replace dailyear = 	1943	if dail ==  11
+# replace dailyear = 	1944	if dail ==  12
+# replace dailyear = 	1948	if dail ==  13
+# replace dailyear = 	1951	if dail ==  14
+# replace dailyear = 	1954	if dail ==  15
+# replace dailyear = 	1957	if dail ==  16
+# replace dailyear = 	1961	if dail ==  17
+# replace dailyear = 	1965	if dail ==  18
+# replace dailyear = 	1969	if dail ==  19
+# replace dailyear = 	1973	if dail ==  20
+# replace dailyear = 	1977	if dail ==  21
+# replace dailyear = 	1981	if dail ==  22
+# replace dailyear = 	1982	if dail ==  23
+# replace dailyear = 	1982	if dail ==  24
+# replace dailyear = 	1987	if dail ==  25
+# replace dailyear = 	1989	if dail ==  26
+# replace dailyear = 	1992	if dail ==  27
+# replace dailyear = 	1997	if dail ==  28
+# replace dailyear = 	2002	if dail ==  29
+# replace dailyear = 	2007	if dail ==  30
+# replace dailyear = 	2011	if dail ==  31
+# replace dailyear = 	2016	if dail ==  32
+# 
+# keep if elecyear > 1943
+
+
+```
