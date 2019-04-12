@@ -74,6 +74,13 @@ csv_data <- csv_data %>%
                              educode == 5 ~ 3,
                              TRUE ~ as.double(educode)),
 
+        offprof = case_when(iscoid < 3 ~ 1,
+                            TRUE ~ 0),
+
+        legacyname = case_when(legacyscale == 0 ~ "Nonlegacy",
+                               legacyscale == 1 ~ "Noncabinet legacy",
+                               legacyscale == 2 ~ "Cabinet legacy"),
+
 # The next recode focuses on the Dail term. There had been 32 Dail terms by 2016, but 
 # the current dataset only looks at them as the term number. Since these terms have
 # varying lengths, recoding them into years may yield stronger results on legacy.
@@ -212,10 +219,6 @@ preseanad <- csv_data %>%
   group_by(pid) %>% 
   summarize(preseanad = min(seanad))
 
-agefirst <- csv_data %>% 
-  group_by(pid) %>% 
-  summarize(agefirst = min(first_age))
-
 prevwins <- csv_data %>% 
   mutate(prevwins = cwins) %>% 
   group_by(pid) %>% 
@@ -224,64 +227,68 @@ prevwins <- csv_data %>%
   group_by(pid) %>% 
   summarize(prevwins = min(prevwins))
 
+ever_elected <- csv_data %>% 
+  group_by(pid) %>% 
+  summarize(max = max(cwins)) %>% 
+  mutate(ever_elected = case_when(max > 0 ~ 1,
+                                max == 0 ~ 0)) %>% 
+  select(pid, ever_elected)
+
 csv_data <- csv_data %>% 
   full_join(., first_age, by = "pid") %>% 
-   full_join(., first_party, by = "pid") %>%
-   full_join(., prelocal, by = "pid") %>% 
-   full_join(., preseanad, by = "pid") %>% 
-   full_join(., agefirst, by = "pid") %>% 
-   full_join(., prevwins, by = "pid") %>% 
-   mutate(prevwins2 = prevwins^2)
+  full_join(., first_party, by = "pid") %>%
+  full_join(., prelocal, by = "pid") %>% 
+  full_join(., preseanad, by = "pid") %>% 
+  full_join(., prevwins, by = "pid") %>%
+  full_join(., ever_elected, by = "pid") %>% 
+  mutate(prevwins2 = prevwins ^ 2)
+
+csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabinet legacy", "Cabinet legacy"))
 
 ```
 
 ## Replication
 
-@data use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are the same (save that the graphs look a bit better and some of the regression numbers are ever so slightly off). @data  fail to include replication code to create Tables 1 or 2. Although I may try producing them on my own later, I am skipping them for now.
+@data use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are the same (save that the graphs look a bit better and some of the regression numbers are ever so slightly off). @data  fail to include replication code to create Tables 1 or 2. The replication code create Figure 5 cannot be translated into R. Although I may try producing them on my own later, I am skipping them for now.
 
 ### Figures
 
 ```{r fig1, echo=FALSE, cache=TRUE}
 
 f1_c <- csv_data %>% 
-  count(legacyscale) %>% 
+  count(legacyname) %>% 
   mutate(per = n/sum(n),
          position = "Candidates") %>% 
   select(-n)
 
 f1_td <- csv_data %>% 
   filter(result == 1) %>% 
-  count(legacyscale) %>% 
+  count(legacyname) %>% 
   mutate(per = n/sum(n),
          position = "TDs") %>% 
   select(-n)
 
 f1_gtd <- csv_data %>% 
   filter(result == 1, govparty == 1) %>% 
-  count(legacyscale) %>% 
+  count(legacyname) %>% 
   mutate(per = n/sum(n),
          position = "Government TDs") %>% 
   select(-n)
 
 f1_cm <- csv_data %>% 
   filter(cabappt == 1) %>% 
-  count(legacyscale) %>% 
+  count(legacyname) %>% 
   mutate(per = n/sum(n),
          position = "Cabinet Ministers") %>% 
   select(-n)
 
-f1 <- rbind(f1_c, f1_td, f1_gtd, f1_cm) %>% 
-  mutate(Legacy = case_when(legacyscale == 0 ~ "Nonlegacy",
-                            legacyscale == 1 ~ "Noncabinet legacy",
-                            legacyscale == 2 ~ "Cabinet legacy")) %>% 
-  select(-legacyscale)
-
+f1 <- rbind(f1_c, f1_td, f1_gtd, f1_cm)
 f1$position <- as.factor(f1$position)
 
 f1$position <- fct_relevel(f1$position, "Candidates", "TDs", "Government TDs", "Cabinet Ministers")
 
 f1 %>% 
-  ggplot(aes(x=reorder(position, -per), y=per, fill=Legacy)) +
+  ggplot(aes(x=reorder(position, -per), y=per, fill=legacyname)) +
   geom_bar(stat="identity", position="fill") +
   xlab("") +
   ylab("Percent") +
@@ -289,23 +296,203 @@ f1 %>%
 
 ```
 
-```{r fig2, echo=FALSE, cache=TRUE}
+```{r figdata, echo=FALSE, cache=TRUE}
+
+# A lot of the figures rely on the same subset of data.
+# I create that new data here. This data is the csv data but
+# only looking at candidates who at one point won election.
+
+figdata <- csv_data %>% 
+  filter(ever_elected == 1)
 
 ```
 
+```{r fig2, echo=FALSE, cache=TRUE}
+
+f2_local <- figdata %>% 
+  filter(!is.na(prelocal)) %>% 
+  count(legacyname, prelocal) %>% 
+  spread(prelocal, n) %>% 
+  mutate(per_local = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_local)
+
+f2_seanad <- figdata %>% 
+  filter(!is.na(preseanad)) %>% 
+  count(legacyname, preseanad) %>% 
+  spread(preseanad, n) %>% 
+  mutate(per_seanad = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_seanad)
+
+f2_offprof <- figdata %>% 
+  filter(!is.na(offprof)) %>% 
+  count(legacyname, offprof) %>% 
+  spread(offprof, n) %>% 
+  mutate(per_offprof = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_offprof)
+
+ggplot(f2_local, aes(x=legacyname, y=per_local, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 2. Pre-Electoral Experience (Local)", subtitle = "Sorted by Legacy Status")
+
+ggplot(f2_seanad, aes(x=legacyname, y=per_seanad, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 2. Pre-Electoral Experience (Seanad)", subtitle = "Sorted by Legacy Status")
+
+
+ggplot(f2_offprof, aes(x=legacyname, y=per_offprof, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 2. Pre-Electoral Experience (Professional)", subtitle = "Sorted by Legacy Status")
+
+  
+```
+
 ```{r fig3, echo=FALSE, cache=TRUE}
+
+f3_female <- figdata %>% 
+  filter(!is.na(female)) %>% 
+  count(legacyname, female) %>% 
+  spread(female, n) %>% 
+  mutate(per_female = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_female)
+
+f3_first_age <- figdata %>% 
+  filter(!is.na(first_age)) %>% 
+  group_by(legacyname) %>% 
+  summarize(avg_first_age = mean(first_age)) %>% 
+  select(legacyname, avg_first_age)
+
+f3_localborn <- figdata %>% 
+  filter(!is.na(localborn)) %>% 
+  count(legacyname, localborn) %>% 
+  spread(localborn, n) %>% 
+  mutate(per_localborn = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_localborn)
+
+ggplot(f3_female, aes(x=legacyname, y=per_female, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 3. Pre-Electoral Demographics (Female)", subtitle = "Sorted by Legacy Status")
+
+ggplot(f3_first_age, aes(x=legacyname, y=avg_first_age, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 3. Pre-Electoral Demographics (Age at First Election)", subtitle = "Sorted by Legacy Status")
+
+ggplot(f3_localborn, aes(x=legacyname, y=per_localborn, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 3. Pre-Electoral Demographics (Local Born)", subtitle = "Sorted by Legacy Status")
 
 ```
 
 ```{r fig4, echo=FALSE, cache=TRUE}
 
-```
+f4_postsec <- figdata %>% 
+  filter(!is.na(educode2)) %>% 
+  count(legacyname, educode2) %>% 
+  spread(educode2, n) %>% 
+  mutate(per_postsec = `2`/(`1`+`2`+`3`)) %>% 
+  select(legacyname, per_postsec)
 
-```{r fig5, echo=FALSE, cache=TRUE}
+f4_postgrad <- figdata %>% 
+  filter(!is.na(educode2)) %>% 
+  count(legacyname, educode2) %>% 
+  spread(educode2, n) %>% 
+  mutate(per_postgrad = `3`/(`1`+`2`+`3`)) %>% 
+  select(legacyname, per_postgrad)
+
+f4_ucd <- figdata %>% 
+  filter(!is.na(ucd)) %>% 
+  count(legacyname, ucd) %>% 
+  spread(ucd, n) %>% 
+  mutate(per_ucd = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_ucd)
+
+f4_feeschool <- figdata %>% 
+  filter(!is.na(feeschool)) %>% 
+  count(legacyname, feeschool) %>% 
+  spread(feeschool, n) %>% 
+  mutate(per_feeschool = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_feeschool)
+
+ggplot(f4_postsec, aes(x=legacyname, y=per_postsec, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 4. Pre-Electoral Education (Postsecondary Education)", subtitle = "Sorted by Legacy Status")
+
+ggplot(f4_postgrad, aes(x=legacyname, y=per_postgrad, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 4. Pre-Electoral Education (Postgraduate Degree)", subtitle = "Sorted by Legacy Status")
+
+ggplot(f4_ucd, aes(x=legacyname, y=per_ucd, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 4. Pre-Electoral Education (UCD)", subtitle = "Sorted by Legacy Status")
+
+ggplot(f4_feeschool, aes(x=legacyname, y=per_feeschool, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 4. Pre-Electoral Education (Fee School)", subtitle = "Sorted by Legacy Status")
 
 ```
 
 ```{r fig6, echo=FALSE, cache=TRUE}
+
+fig6data <- figdata %>% 
+  filter(pre_mp == 1,
+         legacyscale != 0)
+
+f6_generation <- fig6data %>% 
+  filter(!is.na(generation)) %>% 
+  group_by(legacyname) %>% 
+  summarize(avg_generation = mean(generation)) %>% 
+  select(legacyname, avg_generation)
+
+f6_samename <- fig6data %>% 
+  filter(!is.na(samename)) %>% 
+  count(legacyname, samename) %>% 
+  spread(samename, n) %>% 
+  mutate(per_samename = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_samename)
+
+f6_samedistrict <- fig6data %>% 
+  filter(!is.na(samedistrict)) %>% 
+  count(legacyname, samedistrict) %>% 
+  spread(samedistrict, n) %>% 
+  mutate(per_samedistrict = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_samedistrict)
+
+ggplot(f6_generation, aes(x=legacyname, y=avg_generation, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 6. Strength of the Dynasty (Generation)", subtitle = "Sorted by Legacy Status")
+
+ggplot(f6_samename, aes(x=legacyname, y=per_samename, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 6. Strength of the Dynasty (Same Name)", subtitle = "Sorted by Legacy Status")
+
+ggplot(f6_samedistrict, aes(x=legacyname, y=per_samedistrict, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 6. Strength of the Dynasty (Same District)", subtitle = "Sorted by Legacy Status")
 
 ```
 
