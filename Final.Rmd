@@ -111,6 +111,25 @@ csv_data <- csv_data %>%
                              dail ==  31 ~ 2011,
                              dail ==  32 ~ 2016),
 
+# Another large case_when recode here with assigning districts to regions 
+# for Table 7.
+
+        region = case_when(district == "Carlow Kildare" | district == "Carlow Kilkenny" | district == "Kildare" | district == "Kildare North" | district == "Kildare South" ~ "Carlow-Kildare-Kilkenny",
+                           district == "Cavan" | district == "Cavan Monaghan" | district == "Monaghan" ~ "Cavan Monaghan",
+                           district == "Clare" | district == "Clare Galway South" ~ "Clare-Galway",
+                           district == "Cork Borough" | district == "Cork City" | district == "Cork City North" | district == "Cork City South" | district == "Cork East" | district == "Cork Mid" | district == "Cork North" | district == "Cork North Central" | district == "Cork North East" | district == "Cork North West" | district == "Cork South" | district == "Cork South Central" | district == "Cork South East" | district == "Cork South West" | district == "Cork West" ~ "Cork",
+                           district == "Donegal" | district == "Donegal East" | district == "Donegal Leitrim" | district == "Donegal North East" | district == "Donegal South West" | district == "Donegal West" ~ "Donegal",
+                           district == "Dublin Artane" | district == "Dublin Ballyfermot" | district == "Dublin Cabra" | district == "Dublin Central" | district == "Dublin Clontarf" | district == "Dublin County" | district == "Dublin County Mid" | district == "Dublin County North" | district == "Dublin County South" | district == "Dublin County West" | district == "Dublin Finglas" | district == "Dublin Mid West" | district == "Dublin North" | district == "Dublin North Central" | district == "Dublin North East" | district == "Dublin North West" | district == "Dublin Rathmines" | district == "Dublin South" | district == "Dublin South Central" | district == "Dublin South East" | district == "Dublin South West" | district == "Dublin Townships" | district == "Dublin West" | district == "Dun Laoghaire" | district == "Dun Laoghaire Rathdown" ~ "Dublin",
+                           district == "Galway East" | district == "Galway North" | district == "Galway North East" | district == "Galway South" | district == "Galway West" ~ "Clare-Galway",
+                           district == "Kerry North" | district == "Kerry North-West Limerick" | district == "Kerry South" ~ "Kerry",
+                           district == "Laoighis Offaly" | district == "Leix Offaly" ~ "Laois-Offaly",
+                           district == "Limerick" | district == "Limerick City" | district == "Limerick County" | district == "Limerick East" | district == "Limerick West" ~ "Limerick",
+                           district == "Mayo" | district == "Mayo East" | district == "Mayo North" | district == "Mayo South" | district == "Mayo West" ~ "Mayo",
+                           district == "Athlone Longford" | district == "Longford Westmeath" | district == "Meath" | district == "Meath East" | district == "Meath West" | district == "Meath Westmeath" | district == "Westmeath" ~ "Meath-Westmeath",
+                           district == "Leitrim" | district == "Longford Roscommon" | district == "Roscommon" | district == "Roscommon Leitrim" | district == "Roscommon Leitrim South" | district == "Sligo" | district == "Sligo Leitrim" | district == "Sligo Leitrim North" ~ "Sligo-Leitrim-Roscommon",
+                           district == "Tipperary" | district == "Tipperary North" | district == "Tipperary South" ~ "Tipperary",
+                           TRUE ~ district),
+
 # Smith and Martin also recode a few partyid values to a new vector named
 # partyidsimple. The changes are minor. Christian Centrists are lumped in with
 # the Christian Solidarity, Sinn Fein's workers' parties are lumped in with
@@ -156,7 +175,11 @@ csv_data <- csv_data %>%
   
   unite("party_year", c("partyidsimple", "elecyear"), remove=FALSE) %>% 
   unite("dist_year", c("districtid", "elecyear"), remove=FALSE) %>% 
-  unite("party_dail", c("partyidsimple", "dail"), remove=FALSE)
+  unite("party_dail", c("partyidsimple", "dail"), remove=FALSE) %>% 
+  unite("party_dist", c("partyid", "districtid"), remove=FALSE) %>% 
+  unite("party_region", c("partyid", "region"), remove=FALSE) %>% 
+  unite(party_dist_dail, c("partyid", "districtid", "dail"), remove=FALSE) %>% 
+  unite(party_region_dail, c("partyid" , "region", "dail"), remove=FALSE)
 
 # There are quite a few rejoins necessary here since some new variables are
 # summary data (and some of those are conditional on other factors). I create
@@ -216,6 +239,8 @@ csv_data <- csv_data %>%
 
 @data use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are the same (save that the graphs look a bit better and some of the regression numbers are ever so slightly off). @data  fail to include replication code to create Tables 1 or 2. Although I may try producing them on my own later, I am skipping them for now.
 
+### Figures
+
 ```{r fig1, echo=FALSE, cache=TRUE}
 
 f1_c <- csv_data %>% 
@@ -264,7 +289,27 @@ f1 %>%
 
 ```
 
-There is no Stata code to create Tables 1 or 2. I may eventually try to replicate them using R, but since the authors do not provide any replication code for them, I am skipping them for now.
+```{r fig2, echo=FALSE, cache=TRUE}
+
+```
+
+```{r fig3, echo=FALSE, cache=TRUE}
+
+```
+
+```{r fig4, echo=FALSE, cache=TRUE}
+
+```
+
+```{r fig5, echo=FALSE, cache=TRUE}
+
+```
+
+```{r fig6, echo=FALSE, cache=TRUE}
+
+```
+
+### Tables
 
 ```{r t3, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
@@ -307,6 +352,30 @@ stargazer(t5_1, t5_2, t5_3, t5_4, t5_5,
           type = 'html')
 
 ```
+
+```{r t6, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
+
+t6_1 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + generation | party_dail, subset(csv_data, pre_mp == 1))
+t6_2 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + samename | party_dail, subset(csv_data, pre_mp == 1))
+t6_3 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + samedistrict | party_dail, subset(csv_data, pre_mp == 1))
+
+stargazer(t6_1, t6_2, t6_3,
+          title = "Table 6. Unpacking the Informational Advantage: Strength of the Dynasty?",
+          type = 'html')
+
+```
+
+```{r t7, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
+
+t7_1 <- felm(cabappt ~ as.factor(legacyscale) | party_region_dail, csv_data)
+t7_2 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 | party_region_dail, csv_data)
+
+stargazer(t7_1, t7_2,
+          title = "Table 7. Unpacking the Informational Advantage: Party Strongholds?",
+          type = 'html')
+
+```
+
 
 ## References
 
