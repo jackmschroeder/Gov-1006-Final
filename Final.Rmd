@@ -363,7 +363,12 @@ csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabin
 
 ```{r fig1, echo=FALSE, cache=TRUE}
 
-# Figure 1 
+# Figure 1 is a stacked bar plot looking at the proportion of legacies among
+# candidates, elected TDs, TDs in the coalition party, and cabinet ministers.
+# To make Figure 1, I had to do a decent amount of data wrangling. This first
+# required me to make percentages of legacy status among each of the four 
+# politician categories outlined above.
+
 f1_c <- csv_data %>% 
   count(legacyname) %>% 
   mutate(per = n/sum(n),
@@ -391,10 +396,20 @@ f1_cm <- csv_data %>%
          position = "Cabinet Ministers") %>% 
   select(-n)
 
+# From there, I used rbind to create a long dataset. I also
+# made position and legacy name into a factor variables that I 
+# releveled to make the graph look better.
+
 f1 <- rbind(f1_c, f1_td, f1_gtd, f1_cm)
 f1$position <- as.factor(f1$position)
-
 f1$position <- fct_relevel(f1$position, "Candidates", "TDs", "Government TDs", "Cabinet Ministers")
+f1$legacyname <- fct_relevel(f1$legacyname, "Cabinet legacy", "Noncabinet legacy",
+                             "Nonlegacy")
+
+# From there, I just had to use ggplot with the fill, stat, and
+# position attributes correctly selected to show the values on top
+# of one another and in the proper order. I titled and labeled 
+# appropriately.
 
 f1 %>% 
   ggplot(aes(x=reorder(position, -per), y=per, fill=legacyname)) +
@@ -418,6 +433,12 @@ figdata <- csv_data %>%
 
 ```{r fig2, echo=FALSE, cache=TRUE}
 
+# Figure 2 (and 3 and 4) look at attribute data prior to election.
+# Unlike Figure 1, they are not stacked bar plots. This makes things
+# a bit easier when wrangling data. All I have to do is create the proper
+# percentages before calling for ggplot. Keep in mind that in the paper 
+# and in this replication, many of these figures are multiple graphs.
+
 f2_local <- figdata %>% 
   filter(!is.na(prelocal)) %>% 
   count(legacyname, prelocal) %>% 
@@ -439,6 +460,8 @@ f2_offprof <- figdata %>%
   mutate(per_offprof = `1`/(`1`+`0`)) %>% 
   select(legacyname, per_offprof)
 
+# I call ggplot three times to create the three displayed graphs.
+
 ggplot(f2_local, aes(x=legacyname, y=per_local, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
@@ -451,17 +474,18 @@ ggplot(f2_seanad, aes(x=legacyname, y=per_seanad, fill=legacyname)) +
   ylab("") +
   ggtitle("Figure 2. Pre-Electoral Experience (Seanad)", subtitle = "Sorted by Legacy Status")
 
-
 ggplot(f2_offprof, aes(x=legacyname, y=per_offprof, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 2. Pre-Electoral Experience (Professional)", subtitle = "Sorted by Legacy Status")
 
-  
 ```
 
 ```{r fig3, echo=FALSE, cache=TRUE}
+
+# Whereas Figure 2 looked at experience data, Figure 3 looks at demographic
+# data. I do the same data wrangling process as for Figure 2.
 
 f3_female <- figdata %>% 
   filter(!is.na(female)) %>% 
@@ -482,6 +506,8 @@ f3_localborn <- figdata %>%
   spread(localborn, n) %>% 
   mutate(per_localborn = `1`/(`1`+`0`)) %>% 
   select(legacyname, per_localborn)
+
+# Then I just call three ggplots and display the results.
 
 ggplot(f3_female, aes(x=legacyname, y=per_female, fill=legacyname)) + 
   geom_bar(stat="identity") + 
@@ -504,6 +530,9 @@ ggplot(f3_localborn, aes(x=legacyname, y=per_localborn, fill=legacyname)) +
 ```
 
 ```{r fig4, echo=FALSE, cache=TRUE}
+
+# Figure 4 looks at the same pre-electoral attribute data, but focusing on 
+# education. I do the same commands to data wrangle.
 
 f4_postsec <- figdata %>% 
   filter(!is.na(educode2)) %>% 
@@ -533,6 +562,8 @@ f4_feeschool <- figdata %>%
   mutate(per_feeschool = `1`/(`1`+`0`)) %>% 
   select(legacyname, per_feeschool)
 
+# Then I call ggplot four times to display the four layers of output.
+
 ggplot(f4_postsec, aes(x=legacyname, y=per_postsec, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
@@ -561,6 +592,11 @@ ggplot(f4_feeschool, aes(x=legacyname, y=per_feeschool, fill=legacyname)) +
 
 ```{r fig6, echo=FALSE, cache=TRUE}
 
+# Figure 6 contrasts cabinet and noncabinet legacies through legacy
+# attributes (generation number, sharing the same name/district as
+# the predecessor in the dynasty). Generation is shown as the number,
+# while same name and same district are shown in percentage form.
+
 fig6data <- figdata %>% 
   filter(pre_mp == 1,
          legacyscale != 0)
@@ -584,6 +620,8 @@ f6_samedistrict <- fig6data %>%
   spread(samedistrict, n) %>% 
   mutate(per_samedistrict = `1`/(`1`+`0`)) %>% 
   select(legacyname, per_samedistrict)
+
+# I call three ggplots to display the output.
 
 ggplot(f6_generation, aes(x=legacyname, y=avg_generation, fill=legacyname)) + 
   geom_bar(stat="identity") + 
