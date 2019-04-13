@@ -14,8 +14,10 @@ bibliography: references.bib
 ```{r setup, include=FALSE, cache=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 
-# I only need tidyverse for the time being. Once I start replicating the figures, I will
-# likely need some other libraries.
+# I load in three libraries. The first, lfe, allows me to regress using absorbed
+# fixed effects (similar to the absorb function in Stata). The second, stargazer,
+# lets me create regression output tables. The third is tidyverse, which is useful
+# when wrangling with data.
 
 library(lfe)
 library(stargazer)
@@ -74,8 +76,15 @@ csv_data <- csv_data %>%
                              educode == 5 ~ 3,
                              TRUE ~ as.double(educode)),
 
+# offprof is whether the candidate had an "official" profession (which I think refers to
+# a senior level). I code that using a case_when.
+
         offprof = case_when(iscoid < 3 ~ 1,
                             TRUE ~ 0),
+
+# I also found it really helpful to recode legacyscale as the actual name values used in
+# graphing (nonlegacy, noncabinet legacy, and cabinet legacy). I assign this to
+# legacyname.
 
         legacyname = case_when(legacyscale == 0 ~ "Nonlegacy",
                                legacyscale == 1 ~ "Noncabinet legacy",
@@ -119,22 +128,103 @@ csv_data <- csv_data %>%
                              dail ==  32 ~ 2016),
 
 # Another large case_when recode here with assigning districts to regions 
-# for Table 7.
+# for Table 7. This was even longer in the original Stata.
 
-        region = case_when(district == "Carlow Kildare" | district == "Carlow Kilkenny" | district == "Kildare" | district == "Kildare North" | district == "Kildare South" ~ "Carlow-Kildare-Kilkenny",
-                           district == "Cavan" | district == "Cavan Monaghan" | district == "Monaghan" ~ "Cavan Monaghan",
-                           district == "Clare" | district == "Clare Galway South" ~ "Clare-Galway",
-                           district == "Cork Borough" | district == "Cork City" | district == "Cork City North" | district == "Cork City South" | district == "Cork East" | district == "Cork Mid" | district == "Cork North" | district == "Cork North Central" | district == "Cork North East" | district == "Cork North West" | district == "Cork South" | district == "Cork South Central" | district == "Cork South East" | district == "Cork South West" | district == "Cork West" ~ "Cork",
-                           district == "Donegal" | district == "Donegal East" | district == "Donegal Leitrim" | district == "Donegal North East" | district == "Donegal South West" | district == "Donegal West" ~ "Donegal",
-                           district == "Dublin Artane" | district == "Dublin Ballyfermot" | district == "Dublin Cabra" | district == "Dublin Central" | district == "Dublin Clontarf" | district == "Dublin County" | district == "Dublin County Mid" | district == "Dublin County North" | district == "Dublin County South" | district == "Dublin County West" | district == "Dublin Finglas" | district == "Dublin Mid West" | district == "Dublin North" | district == "Dublin North Central" | district == "Dublin North East" | district == "Dublin North West" | district == "Dublin Rathmines" | district == "Dublin South" | district == "Dublin South Central" | district == "Dublin South East" | district == "Dublin South West" | district == "Dublin Townships" | district == "Dublin West" | district == "Dun Laoghaire" | district == "Dun Laoghaire Rathdown" ~ "Dublin",
-                           district == "Galway East" | district == "Galway North" | district == "Galway North East" | district == "Galway South" | district == "Galway West" ~ "Clare-Galway",
-                           district == "Kerry North" | district == "Kerry North-West Limerick" | district == "Kerry South" ~ "Kerry",
-                           district == "Laoighis Offaly" | district == "Leix Offaly" ~ "Laois-Offaly",
-                           district == "Limerick" | district == "Limerick City" | district == "Limerick County" | district == "Limerick East" | district == "Limerick West" ~ "Limerick",
-                           district == "Mayo" | district == "Mayo East" | district == "Mayo North" | district == "Mayo South" | district == "Mayo West" ~ "Mayo",
-                           district == "Athlone Longford" | district == "Longford Westmeath" | district == "Meath" | district == "Meath East" | district == "Meath West" | district == "Meath Westmeath" | district == "Westmeath" ~ "Meath-Westmeath",
-                           district == "Leitrim" | district == "Longford Roscommon" | district == "Roscommon" | district == "Roscommon Leitrim" | district == "Roscommon Leitrim South" | district == "Sligo" | district == "Sligo Leitrim" | district == "Sligo Leitrim North" ~ "Sligo-Leitrim-Roscommon",
-                           district == "Tipperary" | district == "Tipperary North" | district == "Tipperary South" ~ "Tipperary",
+        region = case_when(district == "Carlow Kildare" | 
+                             district == "Carlow Kilkenny" | 
+                             district == "Kildare" | 
+                             district == "Kildare North" |
+                             district == "Kildare South" ~ "Carlow-Kildare-Kilkenny",
+                           district == "Cavan" | 
+                             district == "Cavan Monaghan" | 
+                             district == "Monaghan" ~ "Cavan Monaghan",
+                           district == "Clare" | 
+                             district == "Clare Galway South" ~ "Clare-Galway",
+                           district == "Cork Borough" | 
+                             district == "Cork City" |
+                             district == "Cork City North" | 
+                             district == "Cork City South" | 
+                             district == "Cork East" | 
+                             district == "Cork Mid" | 
+                             district == "Cork North" | 
+                             district == "Cork North Central" |
+                             district == "Cork North East" | 
+                             district == "Cork North West" | 
+                             district == "Cork South" | 
+                             district == "Cork South Central" |
+                             district == "Cork South East" | 
+                             district == "Cork South West" | 
+                             district == "Cork West" ~ "Cork",
+                           district == "Donegal" | 
+                             district == "Donegal East" | 
+                             district == "Donegal Leitrim" | 
+                             district == "Donegal North East" | 
+                             district == "Donegal South West" | 
+                             district == "Donegal West" ~ "Donegal",
+                           district == "Dublin Artane" | 
+                             district == "Dublin Ballyfermot"| 
+                             district == "Dublin Cabra" | 
+                             district == "Dublin Central" |
+                             district == "Dublin Clontarf" | 
+                             district == "Dublin County" |
+                             district == "Dublin County Mid" | 
+                             district == "Dublin County North" | 
+                             district == "Dublin County South" | 
+                             district == "Dublin County West" | 
+                             district == "Dublin Finglas" | 
+                             district == "Dublin Mid West" | 
+                             district == "Dublin North" | 
+                             district == "Dublin North Central" | 
+                             district == "Dublin North East" | 
+                             district == "Dublin North West" | 
+                             district == "Dublin Rathmines" | 
+                             district == "Dublin South" | 
+                             district == "Dublin South Central" | 
+                             district == "Dublin South East" | 
+                             district == "Dublin South West" | 
+                             district == "Dublin Townships" | 
+                             district == "Dublin West" | 
+                             district == "Dun Laoghaire" | 
+                             district == "Dun Laoghaire Rathdown" ~ "Dublin",
+                           district == "Galway East" | 
+                             district == "Galway North" | 
+                             district == "Galway North East" | 
+                             district == "Galway South" | 
+                             district == "Galway West" ~ "Clare-Galway",
+                           district == "Kerry North" | 
+                             district == "Kerry North-West Limerick" | 
+                             district == "Kerry South" ~ "Kerry",
+                           district == "Laoighis Offaly" | 
+                             district == "Leix Offaly" ~ "Laois-Offaly",
+                           district == "Limerick" | 
+                             district == "Limerick City" | 
+                             district == "Limerick County" | 
+                             district == "Limerick East" | 
+                             district == "Limerick West" ~ "Limerick",
+                           district == "Mayo" | 
+                             district == "Mayo East" | 
+                             district == "Mayo North" | 
+                             district == "Mayo South" | 
+                             district == "Mayo West" ~ "Mayo",
+                           district == "Athlone Longford" | 
+                             district == "Longford Westmeath" | 
+                             district == "Meath" | 
+                             district == "Meath East" | 
+                             district == "Meath West" | 
+                             district == "Meath Westmeath" | 
+                             district == "Westmeath" ~ "Meath-Westmeath",
+                           district == "Leitrim" | 
+                             district == "Longford Roscommon" | 
+                             district == "Roscommon" | 
+                             district == "Roscommon Leitrim" | 
+                             district == "Roscommon Leitrim South" | 
+                             district == "Sligo" | 
+                             district == "Sligo Leitrim" | 
+                             district == "Sligo Leitrim North" ~
+                             "Sligo-Leitrim-Roscommon",
+                           district == "Tipperary" | 
+                             district == "Tipperary North" | 
+                             district == "Tipperary South" ~ "Tipperary",
                            TRUE ~ district),
 
 # Smith and Martin also recode a few partyid values to a new vector named
@@ -185,13 +275,16 @@ csv_data <- csv_data %>%
   unite("party_dail", c("partyidsimple", "dail"), remove=FALSE) %>% 
   unite("party_dist", c("partyid", "districtid"), remove=FALSE) %>% 
   unite("party_region", c("partyid", "region"), remove=FALSE) %>% 
-  unite(party_dist_dail, c("partyid", "districtid", "dail"), remove=FALSE) %>% 
-  unite(party_region_dail, c("partyid" , "region", "dail"), remove=FALSE)
+  unite("party_dist_dail", c("partyid", "districtid", "dail"), remove=FALSE) %>% 
+  unite("party_region_dail", c("partyid" , "region", "dail"), remove=FALSE)
 
 # There are quite a few rejoins necessary here since some new variables are
 # summary data (and some of those are conditional on other factors). I create
 # new dataframes for them but will rejoin them back to csv_data after they are
 # all created. 
+
+# first_age is the initial age of each candidate when they ran for the first
+# time.
 
 first_age <- csv_data %>% 
   group_by(pid) %>% 
@@ -199,25 +292,30 @@ first_age <- csv_data %>%
   group_by(pid) %>% 
   summarize(first_age = min(first_age))
 
+# first_party is the first party of each candidate.
+
 first_party <- csv_data %>% 
   group_by(pid) %>% 
-  mutate(first_party = case_when(cruns == 1 ~ party,
-                                 TRUE ~ "NA")) %>% 
+  mutate(first_party = case_when(cruns == 1 ~ party, TRUE ~ "NA")) %>% 
   group_by(pid) %>% 
   summarize(first_party = min(first_party))
 
-# I need to rejoin the data twice: one to create prelocal, one to
-# create preseanad. These take the lowest values of whether a candidate
-# held local office or was in the Seanad (presumably because the 
-# minimum value will hold true for when the candidate first ran).
+# prelocal looks at whether a candidate had local office experience
+# before running for the first time.
 
 prelocal <- csv_data %>% 
   group_by(pid) %>% 
   summarize(prelocal = min(local))
 
+# preseanad analyzes whether a candidate served in the Seanad before
+# running for the first time.
+
 preseanad <- csv_data %>% 
   group_by(pid) %>% 
   summarize(preseanad = min(seanad))
+
+# prevwins is how many wins the candidate has had at the time of
+# the election.
 
 prevwins <- csv_data %>% 
   mutate(prevwins = cwins) %>% 
@@ -227,12 +325,16 @@ prevwins <- csv_data %>%
   group_by(pid) %>% 
   summarize(prevwins = min(prevwins))
 
+# ever_elected is coded to 1 if the candidate ever won an election.
+
 ever_elected <- csv_data %>% 
   group_by(pid) %>% 
   summarize(max = max(cwins)) %>% 
   mutate(ever_elected = case_when(max > 0 ~ 1,
                                 max == 0 ~ 0)) %>% 
   select(pid, ever_elected)
+
+# I rejoin all of this data back to csv_data.
 
 csv_data <- csv_data %>% 
   full_join(., first_age, by = "pid") %>% 
@@ -241,7 +343,13 @@ csv_data <- csv_data %>%
   full_join(., preseanad, by = "pid") %>% 
   full_join(., prevwins, by = "pid") %>%
   full_join(., ever_elected, by = "pid") %>% 
+  
+# I also create prevwins2, which is prevwins squared.
+  
   mutate(prevwins2 = prevwins ^ 2)
+
+# Changing legacyname into a factor and releveling it helps make the 
+# graphs look presentable for the figures.
 
 csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabinet legacy", "Cabinet legacy"))
 
@@ -255,6 +363,7 @@ csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabin
 
 ```{r fig1, echo=FALSE, cache=TRUE}
 
+# Figure 1 
 f1_c <- csv_data %>% 
   count(legacyname) %>% 
   mutate(per = n/sum(n),
@@ -500,11 +609,34 @@ ggplot(f6_samedistrict, aes(x=legacyname, y=per_samedistrict, fill=legacyname)) 
 
 ```{r t3, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
+# Table 3 measures the electoral advantage of legacies. It uses the
+# election result as its left-hand variable. I use felm here because
+# Smith and Martin absorb some of their fixed effects (like party-year),
+# and regular lm won't let me do that. All of this uses csv_data. I create
+# each model.
+
+# Model 1 is simply looking at legacy's impact on winning.
+
 t3_1 <- felm(result ~ as.factor(legacyscale), csv_data)
+
+# Model 2 is legacy's impact on winning, but with party-year fixed effects.
+
 t3_2 <- felm(result ~ as.factor(legacyscale) | party_year, csv_data)
+
+# Model 3 is the same as Model 2 but with district-year fixed effects.
+
 t3_3 <- felm(result ~ as.factor(legacyscale) | dist_year, csv_data)
+
+# Model 4 looks at being female and being a first-time candidate, along with
+# party-year fixed effects.
+
 t3_4 <- felm(result ~ as.factor(legacyscale) + female + firstrun | party_year, csv_data)
+
+# Model 5 reproduces Model 4 but with district-year fixed effects.
+
 t3_5 <- felm(result ~ as.factor(legacyscale) + female + firstrun | dist_year, csv_data)
+
+# I display the output using stargazer.
 
 stargazer(t3_1, t3_2, t3_3, t3_4, t3_5,
           title = "Table 3. The Electoral Advantage of Legacy: Election Result",
@@ -514,11 +646,32 @@ stargazer(t3_1, t3_2, t3_3, t3_4, t3_5,
 
 ```{r t4, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
+# Table 4 looks at the electoral advantage of legacy, but with quota share
+# as the measured output variable. quotashare is the proportion of the Droop
+# Quota (used in multimember districts to determine who wins) met by the 
+# candidate's first preference votes.
+
+# Model 1 is simply legacy's impact on quota achieved.
+
 t4_1 <- felm(quotashare ~ as.factor(legacyscale), csv_data)
+
+# Model 2 is similar to Model 1 but with party-year fixed effects.
+
 t4_2 <- felm(quotashare ~ as.factor(legacyscale) | party_year, csv_data)
+
+# Model 3 is the same as Model 1 but with district-year fixed effects.
+
 t4_3 <- felm(quotashare ~ as.factor(legacyscale) | dist_year, csv_data)
+
+# Model 4 adds being female and being a first-time candidate to Model 2.
+
 t4_4 <- felm(quotashare ~ as.factor(legacyscale) + female + firstrun | party_year, csv_data)
+
+# Model 5 is the same as Model 4, but with district-year fixed effects.
+
 t4_5 <- felm(quotashare ~ as.factor(legacyscale) + female + firstrun | dist_year, csv_data)
+
+# I display the output with stargazer.
 
 stargazer(t4_1, t4_2, t4_3, t4_4, t4_5,
           title = "Table 4. The Electoral Advantage of Legacy: Share of Quota",
@@ -528,11 +681,34 @@ stargazer(t4_1, t4_2, t4_3, t4_4, t4_5,
 
 ```{r t5, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
+# Table 5 looks at cabinet appointment as the output variable. It seeks
+# to find out whether legacies have an advantage in getting on cabinet.
+
+# Model 1 looks at legacy's impact on cabinet appointment with no effects.
+
 t5_1 <- felm(cabappt ~ as.factor(legacyscale), csv_data)
+
+# Model 2 adds party fixed effects to Model 1.
+
 t5_2 <- felm(cabappt ~ as.factor(legacyscale) | partyidsimple, csv_data)
+
+# Model 3 adds party-dail fixed effects to Model 1 (similar to party-year
+# effects, but focused on which government has power).
+
 t5_3 <- felm(cabappt ~ as.factor(legacyscale) | party_dail, csv_data)
-t5_4 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 | party_dail, csv_data)
-t5_5 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + quotashare | party_dail, csv_data)
+
+# Model 4 adds candidate wins (and candidate wins squared), along with 
+# party-dail fixed effects.
+
+t5_4 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 | party_dail, 
+             csv_data)
+
+# Model 5 adds quota share to Model 4.
+
+t5_5 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + quotashare | 
+               party_dail, csv_data)
+
+# I display the output with stargazer.
 
 stargazer(t5_1, t5_2, t5_3, t5_4, t5_5,
           title = "Table 5. The Legacy Advantage in Cabinet Selection",
@@ -542,9 +718,29 @@ stargazer(t5_1, t5_2, t5_3, t5_4, t5_5,
 
 ```{r t6, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
-t6_1 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + generation | party_dail, subset(csv_data, pre_mp == 1))
-t6_2 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + samename | party_dail, subset(csv_data, pre_mp == 1))
-t6_3 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + samedistrict | party_dail, subset(csv_data, pre_mp == 1))
+# Table 6 looks at what makes dynasties strong. The output variable is still
+# cabinet appointment.
+
+# Model 1 looks at the impact of legacy type, candidate wins, candidate wins squared,
+# and which generation in the legacy the candidate is on cabinet appointment. It
+# also has party-dail fixed effects. The data is subsetted to legacies.
+
+t6_1 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + generation | 
+               party_dail, subset(csv_data, pre_mp == 1))
+
+# Model 2 is the same as Model 1 but uses whether the candidate has the same name
+# as the dynasty rather than generation.
+
+t6_2 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + samename | 
+               party_dail, subset(csv_data, pre_mp == 1))
+
+# Model 3 looks at whether the candidate is from the same district as the dynasty
+# rather than the same name.
+
+t6_3 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + samedistrict |
+               party_dail, subset(csv_data, pre_mp == 1))
+
+# I display the output with stargazer.
 
 stargazer(t6_1, t6_2, t6_3,
           title = "Table 6. Unpacking the Informational Advantage: Strength of the Dynasty?",
@@ -554,8 +750,21 @@ stargazer(t6_1, t6_2, t6_3,
 
 ```{r t7, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
+# All of the region hard-coding comes to fruition in Table 7, which
+# analyzes whether region has an effect on the impact of legacy. Cabinet 
+# appointment is still the output variable.
+
+# Model 1 looks at the impat of legacy on cabinet appointment, with party-region
+# fixed effects.
+
 t7_1 <- felm(cabappt ~ as.factor(legacyscale) | party_region_dail, csv_data)
-t7_2 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 | party_region_dail, csv_data)
+
+# Model 2 looks adds candidate wins and candidate wins squared to Model 1.
+
+t7_2 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 | 
+               party_region_dail, csv_data)
+
+# I display the output with stargazer.
 
 stargazer(t7_1, t7_2,
           title = "Table 7. Unpacking the Informational Advantage: Party Strongholds?",
