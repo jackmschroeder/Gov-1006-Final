@@ -11,6 +11,10 @@ bibliography: references.bib
 ---
 
 
+## Abstract
+
+In this project, I analyze @article's "Political Dynasties and the Selection of Cabinet Ministers". I begin by replicating @article's figures and tables. While some of this output cannot be replicated due to missing data or the inability to reproduce in R (the authors used Stata), I find similar results to the authors in what was producible. From there, I will extend their results in a variety of ways.
+
 ```{r setup, include=FALSE, cache=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 
