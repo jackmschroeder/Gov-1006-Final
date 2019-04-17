@@ -6,7 +6,6 @@ output:
   html_document:
     df_print: paged
   pdf_document: default
-citation_package: natbib
 bibliography: references.bib
 ---
 
@@ -38,9 +37,7 @@ csv_data <- read_csv("Smith-Martin-Replication-Data/IRELAND-CANDIDATES.csv")
 
 ```{r data cleaning, echo=FALSE, cache=TRUE}
 
-# Smith and Martin recode a lot of values before going into their analysis. I am going
-# to translate this part of their work and leave the figures themselves for a later
-# time.
+# Smith and Martin recode a lot of values before going into their analysis.
 
 csv_data <- csv_data %>% 
 
