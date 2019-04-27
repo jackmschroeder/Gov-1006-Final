@@ -5,3 +5,7 @@
 *.Rproj
 *.DS_Store
 *Final.html
+*scratch.R
+*scratch2.Rmd
+*Final_cache/
+*Final_files/
