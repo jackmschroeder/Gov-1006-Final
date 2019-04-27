@@ -1,18 +1,37 @@
 ---
-title: "Final Project"
-author: "Jack Schroeder"
-date: "4/4/2019"
+title: "Dynastic Impacts on Political Outcomes"
+subtitle: "Replication and Extension of Smith and Martin (2017)"
 output:
-  html_document:
-    df_print: paged
   pdf_document: default
-bibliography: references.bib
+header-includes:
+    - \usepackage{setspace}\doublespacing
+    - \usepackage{float}
+    - \usepackage[labelformat=empty]{caption}
 ---
 
+\begin{flushright}
+Jack Schroeder
 
-## Abstract
+Gov 1006 Final Paper
 
-In this project, I analyze @article's "Political Dynasties and the Selection of Cabinet Ministers". I begin by replicating @article's figures and tables. While some of this output cannot be replicated due to missing data or the inability to reproduce in R (the authors used Stata), I find similar results to the authors in what was producible. From there, I will extend their results in a variety of ways.
+April 31, 2019
+\end{flushright}
+
+## Abstract  
+
+In this project, I analyze Smith and Martin (2017)'s "Political Dynasties and the Selection of Cabinet Ministers". I begin by replicating Smith and Martin (2017)'s figures and tables. While some of this output cannot be replicated due to missing data or the inability to reproduce in R (the authors used Stata), I find similar results to the authors in what was producible. From there, I extend the results by using their dataset to analyze the gendered impact of two covariates, dynasty and local experience, on winning election.  
+
+## Introduction  
+
+The importance of political dynasties in legislatures cannot be understated.  
+
+## Literature Review  
+
+Whether these dynasties are beneficial is another question entirely.  
+
+## Why Ireland?  
+
+Closely choose candidates, weak parties, multimember districts, explain STV.  
 
 ```{r setup, include=FALSE, cache=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -356,11 +375,11 @@ csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabin
 
 ```
 
-## Replication
+## Replication  
 
-@data use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are the same (save that the graphs look a bit better and some of the regression numbers are ever so slightly off). @data  fail to include replication code to create Tables 1 or 2. The replication code create Figure 5 cannot be translated into R. Although I may try producing them on my own later, I am skipping them for now.
+Smith and Martin (2017) use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are the same (save that the graphs look a bit better and some of the regression numbers are ever so slightly off). Smith and Martin (2017) fail to include replication code to create Tables 1 or 2. The replication code create Figure 5 cannot be translated into R. Although I may try producing them on my own later, I am skipping them for now.
 
-### Figures
+### Figures  
 
 ```{r fig1, echo=FALSE, cache=TRUE}
 
@@ -412,7 +431,7 @@ f1$legacyname <- fct_relevel(f1$legacyname, "Cabinet legacy", "Noncabinet legacy
 # of one another and in the proper order. I titled and labeled 
 # appropriately.
 
-f1 %>% 
+f1 <- f1 %>% 
   ggplot(aes(x=reorder(position, -per), y=per, fill=legacyname)) +
   geom_bar(stat="identity", position="fill") +
   xlab("") +
@@ -463,19 +482,19 @@ f2_offprof <- figdata %>%
 
 # I call ggplot three times to create the three displayed graphs.
 
-ggplot(f2_local, aes(x=legacyname, y=per_local, fill=legacyname)) + 
+f2_1 <- ggplot(f2_local, aes(x=legacyname, y=per_local, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 2. Pre-Electoral Experience (Local)", subtitle = "Sorted by Legacy Status")
 
-ggplot(f2_seanad, aes(x=legacyname, y=per_seanad, fill=legacyname)) + 
+f2_2 <- ggplot(f2_seanad, aes(x=legacyname, y=per_seanad, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 2. Pre-Electoral Experience (Seanad)", subtitle = "Sorted by Legacy Status")
 
-ggplot(f2_offprof, aes(x=legacyname, y=per_offprof, fill=legacyname)) + 
+f2_3 <- ggplot(f2_offprof, aes(x=legacyname, y=per_offprof, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
@@ -510,19 +529,19 @@ f3_localborn <- figdata %>%
 
 # Then I just call three ggplots and display the results.
 
-ggplot(f3_female, aes(x=legacyname, y=per_female, fill=legacyname)) + 
+f3_1 <- ggplot(f3_female, aes(x=legacyname, y=per_female, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 3. Pre-Electoral Demographics (Female)", subtitle = "Sorted by Legacy Status")
 
-ggplot(f3_first_age, aes(x=legacyname, y=avg_first_age, fill=legacyname)) + 
+f3_2 <- ggplot(f3_first_age, aes(x=legacyname, y=avg_first_age, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 3. Pre-Electoral Demographics (Age at First Election)", subtitle = "Sorted by Legacy Status")
 
-ggplot(f3_localborn, aes(x=legacyname, y=per_localborn, fill=legacyname)) + 
+f3_3 <- ggplot(f3_localborn, aes(x=legacyname, y=per_localborn, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
@@ -565,25 +584,25 @@ f4_feeschool <- figdata %>%
 
 # Then I call ggplot four times to display the four layers of output.
 
-ggplot(f4_postsec, aes(x=legacyname, y=per_postsec, fill=legacyname)) + 
+f4_1 <- ggplot(f4_postsec, aes(x=legacyname, y=per_postsec, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 4. Pre-Electoral Education (Postsecondary Education)", subtitle = "Sorted by Legacy Status")
 
-ggplot(f4_postgrad, aes(x=legacyname, y=per_postgrad, fill=legacyname)) + 
+f4_2 <- ggplot(f4_postgrad, aes(x=legacyname, y=per_postgrad, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 4. Pre-Electoral Education (Postgraduate Degree)", subtitle = "Sorted by Legacy Status")
 
-ggplot(f4_ucd, aes(x=legacyname, y=per_ucd, fill=legacyname)) + 
+f4_3 <- ggplot(f4_ucd, aes(x=legacyname, y=per_ucd, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 4. Pre-Electoral Education (UCD)", subtitle = "Sorted by Legacy Status")
 
-ggplot(f4_feeschool, aes(x=legacyname, y=per_feeschool, fill=legacyname)) + 
+f4_4 <- ggplot(f4_feeschool, aes(x=legacyname, y=per_feeschool, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
@@ -624,19 +643,19 @@ f6_samedistrict <- fig6data %>%
 
 # I call three ggplots to display the output.
 
-ggplot(f6_generation, aes(x=legacyname, y=avg_generation, fill=legacyname)) + 
+f6_1 <- ggplot(f6_generation, aes(x=legacyname, y=avg_generation, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 6. Strength of the Dynasty (Generation)", subtitle = "Sorted by Legacy Status")
 
-ggplot(f6_samename, aes(x=legacyname, y=per_samename, fill=legacyname)) + 
+f6_2 <- ggplot(f6_samename, aes(x=legacyname, y=per_samename, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
   ggtitle("Figure 6. Strength of the Dynasty (Same Name)", subtitle = "Sorted by Legacy Status")
 
-ggplot(f6_samedistrict, aes(x=legacyname, y=per_samedistrict, fill=legacyname)) + 
+f6_3 <- ggplot(f6_samedistrict, aes(x=legacyname, y=per_samedistrict, fill=legacyname)) + 
   geom_bar(stat="identity") + 
   xlab("") +
   ylab("") +
@@ -644,7 +663,7 @@ ggplot(f6_samedistrict, aes(x=legacyname, y=per_samedistrict, fill=legacyname)) 
 
 ```
 
-### Tables
+### Tables  
 
 ```{r t3, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
@@ -677,9 +696,9 @@ t3_5 <- felm(result ~ as.factor(legacyscale) + female + firstrun | dist_year, cs
 
 # I display the output using stargazer.
 
-stargazer(t3_1, t3_2, t3_3, t3_4, t3_5,
+t3 <- stargazer(t3_1, t3_2, t3_3, t3_4, t3_5,
           title = "Table 3. The Electoral Advantage of Legacy: Election Result",
-          type = 'html')
+          header = FALSE)
 
 ```
 
@@ -712,9 +731,9 @@ t4_5 <- felm(quotashare ~ as.factor(legacyscale) + female + firstrun | dist_year
 
 # I display the output with stargazer.
 
-stargazer(t4_1, t4_2, t4_3, t4_4, t4_5,
+t4 <- stargazer(t4_1, t4_2, t4_3, t4_4, t4_5,
           title = "Table 4. The Electoral Advantage of Legacy: Share of Quota",
-          type = 'html')
+          header = FALSE)
 
 ```
 
@@ -749,9 +768,9 @@ t5_5 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + quotashare |
 
 # I display the output with stargazer.
 
-stargazer(t5_1, t5_2, t5_3, t5_4, t5_5,
+t5 <- stargazer(t5_1, t5_2, t5_3, t5_4, t5_5,
           title = "Table 5. The Legacy Advantage in Cabinet Selection",
-          type = 'html')
+          header = FALSE)
 
 ```
 
@@ -781,9 +800,9 @@ t6_3 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + samedistrict |
 
 # I display the output with stargazer.
 
-stargazer(t6_1, t6_2, t6_3,
+t6 <- stargazer(t6_1, t6_2, t6_3,
           title = "Table 6. Unpacking the Informational Advantage: Strength of the Dynasty?",
-          type = 'html')
+          header = FALSE)
 
 ```
 
@@ -805,13 +824,43 @@ t7_2 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 |
 
 # I display the output with stargazer.
 
-stargazer(t7_1, t7_2,
+t7 <- stargazer(t7_1, t7_2,
           title = "Table 7. Unpacking the Informational Advantage: Party Strongholds?",
-          type = 'html')
+          header = FALSE)
+
+```
+
+## Extension  
+
+I will extend Smith and Martin (2017) in two ways: analyzing the gendered effect of dynasties on winning election and looking at the effect of another potentially gendered covariate, local experience, on winning election.  
+
+### Gendered Effect of Dynasty  
+
+This portion of the extension also serves as a replication of Folke, Rickne, and Smith (2017) who, with a similar dataset to Smith and Martin (2017), question whether there is a gender-specific impact to being a legacy in terms of winning election.  
+
+To accomplish this, I take the Smith and Martin (2017) dataset with the same changes detailed above. 
+
+### Gendered Effect of Local Experience  
+
+## Appendix  
+
+Below are the figures and tables included in Smith and Martin (2017) that I chose not to display in the "Replication" portion of the paper.  
+
+```{r}
 
 ```
 
 
-## References
+## References  
 
-It appears the reference format we normally use isn't entirely working for me yet. This will be fixed!
+Folke, O., Rickne, J., and Smith, D. (2017). Gender and dynastic political recruitment. *Research Institute of*
+
+\    *Industrial Economics*. Retrieved from ifn.se
+
+Smith, D., and Martin, S. (2017). Political dynasties and the selection of cabinet ministers. *Legislative* 
+
+\    *Studies Quarterly 42*(1). Retrieved from wiley.com
+
+Smith, D., and Martin, S. (2017). Replication data for: Political dynasties and the selection of cabinet 
+
+\    ministers. *Harvard Dataverse*. Retrieved from dataverse.harvard.edu
