@@ -27,7 +27,9 @@ The importance of political dynasties in legislatures cannot be understated.
 
 ## Literature Review  
 
-Whether these dynasties are beneficial is another question entirely.  
+Whether these dynasties are beneficial is another question entirely. Using economic data from India, Eapen George and Ponattu (2017) estiamte that dynastic rule tends to slow economic growth within each dynastic constituency, worsen the provision of public goods across constitutencies, and heighten ethnic polarization among voters. This evidence goes against the common refrain that members of political dynasties are better at legislating because of a greater familiarity with the political system. Indeed, it may be the case that dynasties lead to worse governance. Tusalem and Pe-Aguirre (2013) conclude through their analysis of dynasties in the Philippines that provinces dominated by dynasties tend to spend money less effectively on infrastructure and health than other provinces, while they also have more crime and unemployment. Most strikingly, even though the presence of dynasties tends to incude higher levels of congressional earmarks, dynasties spend the money less effectively than their counterparts.  
+
+That said, there is reason to believe dynasties can be normatively beneficial. Lacriox et al (2019) analyze the French Parliament during the initial stages of World War Two and find that members of dynasties were significantly more pro-democratic in their voting records than non-dynasties. However, there were striking disparities between dynasties, leading the authors to conclude that there exist separate types of dynasties, each with their own goals toward coalescing power. While dynasties founded by or filled by members of a pro-democratic party (or non-affiliated members who openly supported a democratic France) tended to defend democratic rights, other dynasties acted no more democratic than non-dynasties.  
 
 ## Why Ireland?  
 
