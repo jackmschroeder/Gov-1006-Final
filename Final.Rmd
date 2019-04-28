@@ -68,6 +68,12 @@ csv_data <- csv_data %>%
   mutate(legacyscale = case_when(cablegacy == 1 ~ 2,
                                  pre_mp == 1 ~ 1,
                                  TRUE ~ 0),
+
+# I then add a dynasty variable for my extension. This is a binary equal to 1 if the 
+# candidate qualifies as a dynasty.
+         
+         dynasty = case_when(legacyscale > 0 ~ 1,
+                             TRUE ~ 0),
   
 # cwins is the number of times (including the current term) the candidate has won
 # election to the Dail. est_age is the estimated age of each candidate (if unknown) or
@@ -377,7 +383,7 @@ csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabin
 
 ## Replication  
 
-Smith and Martin (2017) use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are the same (save that the graphs look a bit better and some of the regression numbers are ever so slightly off). Smith and Martin (2017) fail to include replication code to create Tables 1 or 2. The replication code create Figure 5 cannot be translated into R. Although I may try producing them on my own later, I am skipping them for now.
+Smith and Martin (2017) use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are the same (save that the graphs look a bit better and some of the regression numbers are ever so slightly off). Smith and Martin (2017) fail to include replication code to create Tables 1 or 2. The replication code create Figure 5 cannot be translated into R. Although I may try producing them on my own later, I am skipping them for now.  
 
 ### Figures  
 
@@ -836,11 +842,66 @@ I will extend Smith and Martin (2017) in two ways: analyzing the gendered effect
 
 ### Gendered Effect of Dynasty  
 
-This portion of the extension also serves as a replication of Folke, Rickne, and Smith (2017) who, with a similar dataset to Smith and Martin (2017), question whether there is a gender-specific impact to being a legacy in terms of winning election.  
+Smith and Martin (2017) note that "legacies of both types are more likely to be women, which suggests that dynasties may be a significant pathway into politics for female candidate in an otherwise male-dominated parliament" (p. 151). This observation inspired me to dig deeper into the gendered effects of being in a political dynasty. Does being in a dynasty help female candidates counteract the gender gap in winning elections?  
 
-To accomplish this, I take the Smith and Martin (2017) dataset with the same changes detailed above. 
+To answer this question, I manipulated the Smith and Martin (2017) dataset to include a binary varible, `dynasty`, that was coded 1 if the candidate qualified as a dynasty. I then regressed election result on that and the candidate's sex. I ended up with three models: one that had no fixed effects, one that used the party-year fixed effects from Smith and Martin (2017), and one that used the authors' district-year fixed effects. That output is below in Table X.  
+
+That said, it must be mentioned that this analysis is not unique. After creating my models, I found that one of the co-authors of the initial paper, Daniel Smith, currently has a working paper that studies this same topic with a similar dataset using approximately the same modeling technique. As a result, this portion of the extension should be characterized as a replication of Folke, Rickne, and Smith (2017) since, while I did not know it at the time, they were the first to flesh out this idea. This portion of the extension also serves as a replication of Folke, Rickne, and Smith (2017) who, with a similar dataset to Smith and Martin (2017), question whether there is a gender-specific impact to being a legacy in terms of winning election.  
+
+The major difference between my analysis and Folke, Rickne, and Smith (2017) is that they restrict their sample to Ireland's three major parties (Fianna Fail, Fine Gael, and Labour). They justify this decision because those parties have been consistently nominating candidates in most districts. However, I think the results should still hold without subsetting the data in this fashion because (a) there is still a model that creates party-year fixed effects and (b) since Ireland's electoral system places an emphasis on individual candidates, it should not necessarily matter that a party was consistently nominating in each district.  
+
+```{r extension 1, echo=FALSE, warning=FALSE, results='asis'}
+
+library(lfe)
+library(stargazer)
+
+te1_1 <- felm(result ~ female*dynasty, data=csv_data)
+
+te1_2 <- felm(result ~ female*dynasty | party_dail, data=csv_data)
+
+te1_3 <- felm(result ~ female*dynasty | dist_year, data=csv_data)
+
+te1 <- stargazer(te1_1, te1_2, te1_3,
+                 title = "Table X: Gendered Effect of Dynasty",
+                 header=FALSE,
+                 add.lines = list(c("Fixed Effects?", "No", "Party-Year", "District-Year")),
+                 covariate.labels = c("Female",
+                                      "Dynasty",
+                                      "Female * Dynasty"),
+                 dep.var.caption = "Dependent Variable:",
+                 dep.var.labels = "Election Result")
+```
+
 
 ### Gendered Effect of Local Experience  
+
+I then wondered whether other covariates could have differing effects by gender. I thought local political experience was an interesting covariate to study because there seem to be two schools of thought surrounding its gendered effects.  
+
+The first is pessimistic. Okimoto and Brescoll (2010) observe that female candidates seen as ambitious are punished by voters, while male candidates seen in a similar light are not penalized. Excluding a general "feeling" potential voters could get after meeting a candidate face-to-face or watching them in a debate, local experience seems to be the best signal for ambition available to study. While the overall effect of holding local office is positive for men, the effect for women would be expected to be diminished or even negative if the "ambition hypothesis" holds.  
+
+The second possibility is more optimistic about the effect of local experience on female representation, even though it relies on a sexist electorate. Survey data from Fox (2003) demonstrates that fewer women run for office than men because they are more pessimistic about their qualifications. Additionally, research from Huddy and Terkildsen (1993) suggests that female candidates are held to a higher standard than male candidates in elections. It follows, then, that local experience can both incentivize better female candidates to run and give them the extra qualifications necessary to beat male candidates. In fact, if the assumptions prove true, female candidates should gain more benefit from local experience than male candidates do since the electorate seemingly demands more qualifications from women before voting them into office. As a result, the effect of women holding local office should counteract the gender gap.  
+
+To determine which of these hypotheses most accurately reflected the data, I recreated the models from the first extension and applied them to the interaction between candidate sex and local political experience. Again, three models were created: one without fixed effects, one taking party-year effects into account, and one taking district-year effects into account. As in the first extension, I did not subset the data to only include the major parties. The results of the models are summarized below in Table X.  
+
+```{r extension 2, echo=FALSE, warning=FALSE, results='asis'}
+
+te2_1 <- felm(result ~ female*local, data=csv_data)
+
+te2_2 <- felm(result ~ female*local | party_dail, data=csv_data)
+
+te2_3 <- felm(result ~ female*local | dist_year, data=csv_data)
+
+te2 <- stargazer(te2_1, te2_2, te2_3,
+                 title = "Table X: Gendered Effect of Local Experience",
+                 header=FALSE,
+                 add.lines = list(c("Fixed Effects?", "No", "Party-Year", "District-Year")),
+                 covariate.labels = c("Female",
+                                      "Local Experience",
+                                      "Female * Local Experience"),
+                 dep.var.caption = "Dependent Variable:",
+                 dep.var.labels = "Election Result")
+```
+
 
 ## Appendix  
 
