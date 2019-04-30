@@ -1,0 +1,215 @@
+---
+title: "Political Dynasties"
+subtitle: "Replicating Smith and Martin (2017) and Introducing a Gender-Based Extension"  
+author: "Jack Schroeder"
+date: 'May 1 2019'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [tamu]
+    nature:
+      nature:
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>`
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+<style>
+.remark-slide-number {
+  position: inherit;
+}
+
+.remark-slide-number .progress-bar-container {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  display: block;
+  left: 0;
+  right: 0;
+}
+
+.remark-slide-number .progress-bar {
+  height: 100%;
+  background-color: white;
+}
+</style>
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+---
+
+# Outline
+
+--
+
+### I. Political Dynasties
+
+--
+
+#### What are they? Why do we care?
+
+--
+
+### II. Irish Politics
+
+--
+
+#### More than potatoes and Guinness!
+
+--
+
+### III. Smith and Martin (2017)
+
+--
+
+#### Is there a Google Translate for Stata?
+
+--
+
+### IV. Extension: Role of Gender
+
+--
+
+#### Do certain factors have a gender-specific effect?
+
+---
+class: middle, center
+# I. Political Dynasties
+
+---
+layout: true
+
+# I. Political Dynasties
+
+---
+
+## Power begets power
+
+#### Dal Bó et al (2007) find a causal relationship between tenure in office and having a dynastic successor. This political power is self-perpetuating since a postivie exogenous shock to an individual's political power can be transmitted across generations.
+
+## May have some negative effects...
+
+## But also grant legitimacy to the government
+
+---
+
+## Power begets power
+
+## May have some negative effects...
+
+#### Eapen George and Ponattu (2017) estiamte that dynastic rule tends to slow economic growth within each dynastic constituency, worsen the provision of public goods across constitutencies, and heighten ethnic polarization among voters.
+
+## But also grant legitimacy to the government
+
+---
+
+## Power begets power
+
+## May have some negative effects...
+
+## But also grant legitimacy to the government
+
+#### Smith and Martin (2017) explore the idea that parliamentary leaders may give cabinet positions to political dynasties because of familiarity with how the system works and public goodwill.
+
+---
+layout: false
+class: middle, center
+
+# II. Irish Politics
+---
+layout: true
+# II. Irish Politics
+
+---
+
+## PR-STV (not a disease)
+
+#### Ireland as a useful case study.
+
+## Parties and Power
+
+---
+
+## PR-STV
+
+## Parties and Power
+
+#### Dail. Fine Gael. Fianna Fail. Labour. Sinn Fein.
+
+---
+layout: false
+class: middle, center
+# III. Smith and Martin (2017)
+
+---
+layout: true
+# III. Smith and Martin (2017)
+
+---
+
+## Here
+
+#### Over here!
+
+## There
+
+## Everywhere
+
+---
+
+## Here
+
+## There
+
+#### There you go!
+
+## Everywhere
+
+---
+
+## Here
+
+## There
+
+## Everywhere
+
+#### And now for something entirely different...
+
+---
+layout:false
+class: center, middle
+
+# IV. Extension: Role of Gender
+
+---
+layout: true
+
+# IV. Extension: Role of Gender
+
+---
+
+## Part One.
+
+#### Something.
+
+## Part Two.
+
+---
+
+## Part One.
+
+## Part Two.
+
+#### Something else.
+
+---
+layout: false
+class: center, middle
+
+# Questions?
