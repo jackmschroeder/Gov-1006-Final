@@ -40,6 +40,16 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+library(knitr)
+library(tidyverse)
+library(stargazer)
+library(lfe)
+csv_data <- read_rds("Presentation-figure/smdata.rds")
+t3_1 <- felm(result ~ as.factor(legacyscale), csv_data)
+t3_2 <- felm(result ~ as.factor(legacyscale) | party_year, csv_data)
+t3_3 <- felm(result ~ as.factor(legacyscale) | dist_year, csv_data)
+t3_4 <- felm(result ~ as.factor(legacyscale) + female + firstrun | party_year, csv_data)
+t3_5 <- felm(result ~ as.factor(legacyscale) + female + firstrun | dist_year, csv_data)
 ```
 
 ---
@@ -60,7 +70,7 @@ options(htmltools.dir.version = FALSE)
 
 --
 
-#### More than potatoes and Guinness!
+#### More than shamrocks and Guinness!
 
 --
 
@@ -130,7 +140,17 @@ layout: true
 
 ## PR-STV (not a disease)
 
-#### Ireland as a useful case study.
+#### Proportional Representation
+
+* Leads to many parties (but a few big ones)
+
+* Coalition-style governments lasting no more than 7 years
+
+#### Single Transferable Vote
+
+* Multiple candidates per party per district
+
+* Makes this an ideal case --> very candidate-focused elections
 
 ## Parties and Power
 
@@ -140,7 +160,19 @@ layout: true
 
 ## Parties and Power
 
-#### Dail. Fine Gael. Fianna Fail. Labour. Sinn Fein.
+#### US House of Representatives --> Irish Dail
+
+* Congressman --> Teachta Dala (TD)
+
+* US Senate --> Irish Seanad
+
+#### Major parties not that ideological
+
+* Fine Gael and Fianna Fail
+
+* Labour and Sinn Fein are viable other options
+
+* Other movements based in ideology
 
 ---
 layout: false
@@ -153,36 +185,82 @@ layout: true
 
 ---
 
-## Here
+## Focuses
 
-#### Over here!
+* Analyzing the *electoral* advantage of legacies over nonlegacies
 
-## There
+* Determining the *positional* advantage of cabinet legacies over noncabinet legacies
 
-## Everywhere
+* Explaining this advantage (if it really exists)
 
----
+## Methods
 
-## Here
-
-## There
-
-#### There you go!
-
-## Everywhere
+## Conclusions
 
 ---
 
-## Here
+## Focuses
 
-## There
+## Methods
 
-## Everywhere
+#### Dataset
 
-#### And now for something entirely different...
+* Written entirely in Stata
+
+* All Irish candidates for election to Dail from 1918-2016
+
+* Restricted to 1944-2016 to give legacies time to come about (and to account for revolutions/civil wars)
+
+* Lots of candidate-level data (family, education, demographics, etc.)
+
+## Conclusions
+
+---
+
+## Focuses
+
+## Methods
+
+## Conclusions
 
 ---
 layout:false
+class: center, middle
+
+```{r, echo=FALSE, warning=FALSE}
+include_graphics("Presentation-figure/smf1.pdf")
+```
+
+---
+class: middle, center
+```{r, echo=FALSE, warning=FALSE}
+include_graphics("Presentation-figure/smt3.png")
+```
+
+---
+class: middle, center
+```{r, echo=FALSE, warning=FALSE}
+include_graphics("Presentation-figure/smt5.png")
+```
+
+---
+
+# III. Smith and Martin (2017)
+
+## Focuses
+
+## Methods
+
+## Conclusions
+
+#### Legacy electoral advantage exists
+
+#### Cabinet legacy advantage also exists
+
+* Many explanations for mechanisms
+
+---
+
 class: center, middle
 
 # IV. Extension: Role of Gender
@@ -196,9 +274,16 @@ layout: true
 
 ## Part One.
 
-#### Something.
+#### The Gendered Effect of Dynasties
 
 ## Part Two.
+
+---
+class: center, middle
+
+```{r, echo=FALSE, warning=FALSE}
+include_graphics("Presentation-figure/te1.png")
+```
 
 ---
 
@@ -206,7 +291,15 @@ layout: true
 
 ## Part Two.
 
-#### Something else.
+#### The Gendered Effect of Local Experience
+
+---
+
+class: center, middle
+
+```{r, echo=FALSE, warning=FALSE}
+include_graphics("Presentation-figure/te2.png")
+```
 
 ---
 layout: false

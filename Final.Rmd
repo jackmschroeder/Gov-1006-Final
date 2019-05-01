@@ -1,12 +1,14 @@
 ---
 title: "Dynastic Impacts on Political Outcomes"
-subtitle: "Replication and Extension of Smith and Martin (2017)"
 output:
   pdf_document: default
+  html_document:
+    df_print: paged
+subtitle: Replication and Extension of Smith and Martin (2017)
 header-includes:
-    - \usepackage{setspace}\doublespacing
-    - \usepackage{float}
-    - \usepackage[labelformat=empty]{caption}
+- \usepackage{setspace}\doublespacing
+- \usepackage{float}
+- \usepackage[labelformat=empty]{caption}
 ---
 
 \begin{flushright}
@@ -381,6 +383,8 @@ csv_data <- csv_data %>%
 
 csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabinet legacy", "Cabinet legacy"))
 
+write_rds(csv_data, "Presentation-figure/smdata.rds")
+
 ```
 
 ## Replication  
@@ -444,7 +448,10 @@ f1 <- f1 %>%
   geom_bar(stat="identity", position="fill") +
   xlab("") +
   ylab("Percent") +
-  ggtitle("Figure 1. Politician Legacy Proportions", subtitle = "In the Republic of Ireland, 1944-2016")
+  ggtitle("Figure 1. Politician Legacy Proportions", subtitle = "In the Republic of Ireland, 1944-2016") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+ggsave("Presentation-figure/smf1.pdf", f1)
 
 ```
 
@@ -704,9 +711,14 @@ t3_5 <- felm(result ~ as.factor(legacyscale) + female + firstrun | dist_year, cs
 
 # I display the output using stargazer.
 
-t3 <- stargazer(t3_1, t3_2, t3_3, t3_4, t3_5,
+t3 <- stargazer(t3_1, t3_2, t3_4,
           title = "Table 3. The Electoral Advantage of Legacy: Election Result",
-          header = FALSE)
+          header = FALSE,
+          out = "Presentation-figure/smt3.html",
+          covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Female", "First Run"),
+          dep.var.labels = "Election Result",
+          omit.stat = "rsq",
+          add.lines = list(c("Party-Year Fixed Effects?", "No", "Yes", "Yes")))
 
 ```
 
@@ -776,8 +788,13 @@ t5_5 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + quotashare |
 
 # I display the output with stargazer.
 
-t5 <- stargazer(t5_1, t5_2, t5_3, t5_4, t5_5,
+t5 <- stargazer(t5_1, t5_3, t5_4, t5_5,
           title = "Table 5. The Legacy Advantage in Cabinet Selection",
+          out = "Presentation-figure/smt5.html",
+          covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Election Wins", "Election Wins ^2", "Share of Droop Quota"),
+          dep.var.labels = "Cabinet Appointment",
+          omit.stat = "rsq",
+          add.lines = list(c("Party-Year Fixed Effects?", "No", "Yes", "Yes", "Yes")),
           header = FALSE)
 
 ```
@@ -871,7 +888,8 @@ te1 <- stargazer(te1_1, te1_2, te1_3,
                                       "Dynasty",
                                       "Female * Dynasty"),
                  dep.var.caption = "Dependent Variable:",
-                 dep.var.labels = "Election Result")
+                 dep.var.labels = "Election Result",
+                 out = "Presentation-figure/te1.html")
 ```
 
 
@@ -894,14 +912,15 @@ te2_2 <- felm(result ~ female*local | party_dail, data=csv_data)
 te2_3 <- felm(result ~ female*local | dist_year, data=csv_data)
 
 te2 <- stargazer(te2_1, te2_2, te2_3,
-                 title = "Table X: Gendered Effect of Local Experience",
+                 title = "Table Y: Gendered Effect of Local Experience",
                  header=FALSE,
                  add.lines = list(c("Fixed Effects?", "No", "Party-Year", "District-Year")),
                  covariate.labels = c("Female",
                                       "Local Experience",
                                       "Female * Local Experience"),
                  dep.var.caption = "Dependent Variable:",
-                 dep.var.labels = "Election Result")
+                 dep.var.labels = "Election Result",
+                 out = "Presentation-figure/te2.html")
 ```
 
 
