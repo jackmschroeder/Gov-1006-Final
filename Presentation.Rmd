@@ -44,12 +44,7 @@ library(knitr)
 library(tidyverse)
 library(stargazer)
 library(lfe)
-csv_data <- read_rds("Presentation-figure/smdata.rds")
-t3_1 <- felm(result ~ as.factor(legacyscale), csv_data)
-t3_2 <- felm(result ~ as.factor(legacyscale) | party_year, csv_data)
-t3_3 <- felm(result ~ as.factor(legacyscale) | dist_year, csv_data)
-t3_4 <- felm(result ~ as.factor(legacyscale) + female + firstrun | party_year, csv_data)
-t3_5 <- felm(result ~ as.factor(legacyscale) + female + firstrun | dist_year, csv_data)
+
 ```
 
 ---
