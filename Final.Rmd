@@ -389,7 +389,11 @@ write_rds(csv_data, "Presentation-figure/smdata.rds")
 
 ## Replication  
 
-Smith and Martin (2017) use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are the same (save that the graphs look a bit better and some of the regression numbers are ever so slightly off). Smith and Martin (2017) fail to include replication code to create Tables 1 or 2. The replication code create Figure 5 cannot be translated into R. Although I may try producing them on my own later, I am skipping them for now.  
+Smith and Martin (2017) use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are mostly the same. It is entirely possible, though, that using `ggplot2` makes the figures look better and that some of the regression coefficients are off on the hundredths digit and beyond.  
+
+There are some tables and figures that could not be replicated. There was no replication code for Tables 1 and 2 in the Stata code. As a result, I did not attempt to replicate this portion of the paper. Table 1 is a list of the cabinets and governing parties in Ireland from 1944-2016. The cabinets, dates in office, and governing parties are not given in the data, although it would theoretically be possible to figure out whether Fianna Fail or Fine Gael had a majority in the Dail based on which party won more seats in the most recent election. However, the cabinet and Prime Minister would not be able to be determined from this data, so I left it untouched. Table 2 is a Stata summary table of the family relationships and generations among candidates and TDs. While this table is replicable in R, since the code to create it was not included, I decided to focus on replicating the other tables and figures. The figure not included in this replication is Figure 5, which was used to help explain the informational advantage by analyzing several different controls of experience, demographics, and education. This type of coefficient plot is possible in R, but getting the results to directly match the one in the paper was not possible (and would have looked too disjointed to include).  
+
+Those exceptions aside, Smith and Martin (2017)'s results replicate well. There were two major hurdles in replication: translating Stata code and managing multiple graphs. I was able to recreate most of the figures and tables using the `ggplot2` and `stargazer` libraries, respectively. However, the majority of the replication code focused on cleaning the candidate dataset and adding new variables. Using the `tidyverse`, I was able to condense some of the hard-coding relative to the amount used in Stata. The foremost example of this was when the authors added regional data (to create regional fixed effects). In Stata, the authors had to individually assign each district to a region, but by using the `case_when` function, I was able to assign multiple districts to a single region, which cut down the workload by a decent amount. The second hurdle was multiple graphs within the same figure. The majority of the authors' figures were comprised of three bar graphs, mostly reporting summaries of different attributes along the legacy scale. While there exist ways to save multiple graphs within the same figure, I decided it was best to keep each individual call for `ggplot` separate in case I wanted to call one graph and not another in the final paper.  
 
 ### Figures  
 
@@ -450,8 +454,6 @@ f1 <- f1 %>%
   ylab("Percent") +
   ggtitle("Figure 1. Politician Legacy Proportions", subtitle = "In the Republic of Ireland, 1944-2016") +
   guides(fill=guide_legend(title="Legacy Type"))
-
-ggsave("Presentation-figure/smf1.pdf", f1)
 
 ```
 
@@ -714,7 +716,6 @@ t3_5 <- felm(result ~ as.factor(legacyscale) + female + firstrun | dist_year, cs
 t3 <- stargazer(t3_1, t3_2, t3_4,
           title = "Table 3. The Electoral Advantage of Legacy: Election Result",
           header = FALSE,
-          out = "Presentation-figure/smt3.html",
           covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Female", "First Run"),
           dep.var.labels = "Election Result",
           omit.stat = "rsq",
@@ -790,8 +791,7 @@ t5_5 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + quotashare |
 
 t5 <- stargazer(t5_1, t5_3, t5_4, t5_5,
           title = "Table 5. The Legacy Advantage in Cabinet Selection",
-          out = "Presentation-figure/smt5.html",
-          covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Election Wins", "Election Wins ^2", "Share of Droop Quota"),
+          covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Election Wins", "Election Wins Sq.", "Share of Droop Quota"),
           dep.var.labels = "Cabinet Appointment",
           omit.stat = "rsq",
           add.lines = list(c("Party-Year Fixed Effects?", "No", "Yes", "Yes", "Yes")),
@@ -888,8 +888,7 @@ te1 <- stargazer(te1_1, te1_2, te1_3,
                                       "Dynasty",
                                       "Female * Dynasty"),
                  dep.var.caption = "Dependent Variable:",
-                 dep.var.labels = "Election Result",
-                 out = "Presentation-figure/te1.html")
+                 dep.var.labels = "Election Result")
 ```
 
 
@@ -919,8 +918,7 @@ te2 <- stargazer(te2_1, te2_2, te2_3,
                                       "Local Experience",
                                       "Female * Local Experience"),
                  dep.var.caption = "Dependent Variable:",
-                 dep.var.labels = "Election Result",
-                 out = "Presentation-figure/te2.html")
+                 dep.var.labels = "Election Result")
 ```
 
 
