@@ -1,14 +1,21 @@
 ---
-title: "Dynastic Impacts on Political Outcomes"
+title: "Dynastic Impacts on Electoral Outcomes"
 output:
   pdf_document: default
-  html_document:
-    df_print: paged
 subtitle: Replication and Extension of Smith and Martin (2017)
 header-includes:
+# Create double spacing
 - \usepackage{setspace}\doublespacing
+# Allow figures and tables to appear next to text
 - \usepackage{float}
+# Disable automatic captions for tables
 - \usepackage[labelformat=empty]{caption}
+# Set the paragraph indent and spacing.
+- \usepackage{sectsty}
+- \setlength{\parindent}{0em}
+- \setlength{\parskip}{1em}
+# Adjust the font size.
+- \usepackage[fontsize=11pt]{scrextend}
 ---
 
 \begin{flushright}
@@ -33,9 +40,13 @@ Whether these dynasties are beneficial is another question entirely. Using econo
 
 That said, there is reason to believe dynasties can be normatively beneficial. Lacriox et al (2019) analyze the French Parliament during the initial stages of World War Two and find that members of dynasties were significantly more pro-democratic in their voting records than non-dynasties. However, there were striking disparities between dynasties, leading the authors to conclude that there exist separate types of dynasties, each with their own goals toward coalescing power. While dynasties founded by or filled by members of a pro-democratic party (or non-affiliated members who openly supported a democratic France) tended to defend democratic rights, other dynasties acted no more democratic than non-dynasties.  
 
-## Why Ireland?  
+## Why Ireland? (and a Review of Electoral Literature) 
 
-Closely choose candidates, weak parties, multimember districts, explain STV.  
+Ireland is an interesting case study to examine the impact of mostly exogenous covariates (dynastic status and local experience) on winning election. Its electoral system is classified as a proportional representation-based single transferable vote. Proportional representation (PR). Single transferable vote (STV) . These two factors come together to create a very candidate-based process that I argue better allows us to identify how voters act according to their preferences. In a first-past-the-post system like the United States, there are many conflicting factors like ideology that make it tougher to discern voter preferences. For instance, liberal voters who would prefer to vote for a man rather than a woman faced a challenge in the 2016 Presidential Election because their ideological preferences did not match their gender heuristic. However, in a system where parties nominate multiple candidates or the parties are not as ideologically opposed, voters have more leeway to make decisions based on their own personal preferences.  
+
+Reynolds (1999) comments on the variation in gender equality by electoral system. A first-past-the-post structure with single-member districts encourages parties to put forward candidates they feel have majority support, which can disincentivize fielding women or minorities. On the other hand, systems with proportional representation or multimember districts incentivize parties to nominate more diverse slates of candidates to maximize the chances of winning the most seats. In other words, when parties can win multiple seats, they can cater different candidates to different voter bases.  
+
+However, focusing only on the electoral systems ignores the roles of party leaders. Kunovich and Paxton (2005) dig deeper into the gender dynamics at play in this setting. They argue that in proportional systems, greater female leadership on the party level will translate into more female *candidates* in proportional systems, but only in non-proportional systems will female leadership have a direct effect on *successful* candidates. This is because when faced with a potentially sexist electorate, the party primary process in non-proportional, single-member systems has a gatekeeper effect that allows party leaders to circumvent voter preferences by influencing the nomination process to certain candidates' advantage. Paired with ideological differences between parties, the end result is a voter base that seemingly does not have any choice but to vote for a candidate they find distasteful on the basis of race, gender, orientation, religion, etc. This phenomenon provides an alternate pathway for greater gender equality in representation in non-proportional systems, but for the purposes of this project, it highlights that Ireland's electoral systems uniquely and directly expose voter preferences in ways that other systems do not. For this reason, even if a similar candidate dataset existed for the United States, Ireland may still be a useful case.  
 
 ```{r setup, include=FALSE, cache=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
