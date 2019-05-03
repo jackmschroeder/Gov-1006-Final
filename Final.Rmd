@@ -406,8 +406,6 @@ csv_data <- csv_data %>%
 
 csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabinet legacy", "Cabinet legacy"))
 
-write_rds(csv_data, "Presentation-figure/smdata.rds")
-
 ```
 
 ## Replication  
@@ -485,7 +483,7 @@ f1
 ```
 
 
-Smith and Martin (2017)'s first figure demonstrates the magnitude of political dynasties in Irish politics. While over 80% of candidates 
+Smith and Martin (2017)'s first figure demonstrates the magnitude of political dynasties in Irish politics. While over 80% of candidates are not legacies, both types of legacies are disproportionately represented among TDs (elected members of the Dail), TDs in the governing coalition, and cabinet ministers. And, as an impetus for the paper, the reader notices that cabinet legacies are specifically overrepresented among cabinet ministers. This lends credence to the suggestion that cabinet legacies in particular have some sort of informational advantage over noncabinet legacies that results in them getting chosen at a higher rate. Regardless, Figure 1 shows that the overall magnitude of the legacy advantage is much higher in getting elected than in forming the governing coalition or becoming a cabinet minister, as both noncabinet and cabinet legacies comprise about a quarter of TDs, government TDs, and cabinet ministers. While this figure is primarily used to introduce the paper, I think it does a good job of highlighting the different dynamics at play.  
 
 
 ### Table 3  
@@ -531,6 +529,10 @@ t3 <- stargazer(t3_1, t3_2, t3_4,
 
 ```
 
+Table 3 analyzes the electoral advantage legacies hold over nonlegacies. While this phenomenon is taken for granted at the onset of the paper, Smith and Martin (2017) want to both quantify the effect and make sure that noncabinet and cabinet legacies enjoy the same advantage. If the effects between legacy type were significantly different, it could explain the divergence in cabinet selection by itself. Similar to the authors, I find a significant electoral advantage of legacies but no significant differences between legacy type. I quantify this advantage to be around 35 percentage points, which matches Smith and Martin (2017). This advantage decreases when party-year fixed effects are included, and shrinks even more when female candidates and first-time candidates are incorporated into the model. I left out the two models incorporating district-year fixed effects instead of party-year fixed effects to save space and not constrict the rest of the table. The results of those models match the magnitude of those in the paper, though, so it appears that district-year fixed effects replicate fairly well.  
+
+The table does deviate from the one published in Smith and Martin (2017). While the first model - without any fixed effects - has the same coefficients, the standard errors are slightly off. This may be due to differences between how R calculates its standard errors and how Stata reports "robust" standard errors. Models 2 and 3 in the replication report slightly different coefficients and standard errors from the corresponding models in the paper. This may be due to how party-year fixed effects models were constructed. I replicated their process as best I could using R, but it is possible that the absorption of fixed effects worked differently in R or that the creation of the fixed effects themselves was done in a different way. Either way, the magnitude and significance of the results remains the same.  
+
 ### Table 5
 
 ```{r t5, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
@@ -574,9 +576,13 @@ t5 <- stargazer(t5_1, t5_3, t5_4, t5_5,
 
 ```
 
+Table 5 looks at the advantage of cabinet legacies over noncabinet legacies in cabinet selection. Once party-year fixed effects and election wins are incorporated into the model, though, noncabinet legacies face a disadvantage in cabinet selection that is significant at the 0.05 level. The mechanism for this is unclear, but it is entirely possible that legacies of backbench legislators are not given the chance to deviate from their dynasty's role or reputation. Being a noncabinet legacy could also signal weaker candidate quality or a worse relationship with party leaders that is tougher for future legacies to break out of. In model 3, which uses party-year fixed effects and includes election wins and election wins squared, the legacy advantage of cabinet legacies can be quantified at 6 percentage points.  
+
+There are a few differences between my output and the paper. First and foremost, my findings appear to underestimate the cabinet advantage by around 2 percentage points. This could be explained by the differing coefficients when party-year fixed effects are used. This is a bit lower than the 8 percentage points Smith and Martin (2017) settle on, but this have something to do with different party-year fixed effects. The authors also use a smaller sample of candidates to construct Table 5, while I use the full dataset from 1944-2016.   
+
 ## Extension  
 
-I will extend Smith and Martin (2017) in two ways: analyzing the gendered effect of dynasties on winning election and looking at the effect of another potentially gendered covariate, local experience, on winning election.  
+I extend Smith and Martin (2017) in two ways: analyzing the gendered effect of dynasties on winning election and looking at the effect of another potentially gendered covariate, local experience, on winning election.  
 
 ### Gendered Effect of Dynasty  
 
