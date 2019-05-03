@@ -32,23 +32,35 @@ In this project, I analyze Smith and Martin (2017)'s "Political Dynasties and th
 
 ## Introduction  
 
-The importance of political dynasties in legislatures cannot be understated.  
+The importance of political dynasties in legislatures cannot be understated. 
+
+Given enough time, many democracies develop political dynasties. Some of these occur at the local level through mayorships and statehouses, others at the national level through executives and appointees. The legislator, locally elected but serving in a national capacity, presents a unique position for dynasties to thrive in. Since they act as the representatives of their homes, they can have outsized voices in certain conversations and, if effective negotiators, can leverage personal relationships into economic gains for their districts. As such, it is vital for these legislators to excel since, in most cases, their constituents vote them out if they fail to adequately provide for their districts. The importance of individual legislators is magnified in parliamentary systems, in which the governing party selects individual legislators to serve in cabinet and run the government.  
+
+In this paper, I begin by introducing Smith and Martin (2017). After reviewing the literature on both gender representation and introducing the reader to the specifics of Ireland's electoral system, I put forward Smith and Martin (2017)'s hypotheses and two of my own for the extension. Then I detail my replication of "Political Dynasties and the Selection of Cabinet Ministers". After that, I focus on two gender-based extensions. The first looks at the potential mitigating factors of dynastic membership in counteracting the gender gap in winning elections. The second analyzes whether local office experience uniquely helps women win election. 
 
 ## Literature Review  
 
-Whether these dynasties are beneficial is another question entirely. Using economic data from India, Eapen George and Ponattu (2017) estiamte that dynastic rule tends to slow economic growth within each dynastic constituency, worsen the provision of public goods across constitutencies, and heighten ethnic polarization among voters. This evidence goes against the common refrain that members of political dynasties are better at legislating because of a greater familiarity with the political system. Indeed, it may be the case that dynasties lead to worse governance. Tusalem and Pe-Aguirre (2013) conclude through their analysis of dynasties in the Philippines that provinces dominated by dynasties tend to spend money less effectively on infrastructure and health than other provinces, while they also have more crime and unemployment. Most strikingly, even though the presence of dynasties tends to incude higher levels of congressional earmarks, dynasties spend the money less effectively than their counterparts.  
+### Political Dynasties
+
+Daniel Smith and Shane Martin (2017) analyze the interaction of these political dynasties in cabinet formation. Their goals are threefold: closely survey the elecotral advantage legacies hold over nonlegacies, judge whether cabinet legacies - whose predecessors served in cabinet - have an advantage in progressing into cabinet over noncabinet legacies, and dissect the potential mechanisms behind this effect. To accomplish this, the authors work with a candidate-level dataset of Irish politicains encompassing all legislative candidates from 1918-2016 (*n = 11670*). The authors then clean this data and restrict the sample to 1944-2016 to both account for instability surrounding the independence movement and allow for dynasties to develop. They find that legacies indeed hold an elecotral advantage over nonlegacies equal to over 35 percentage points, but that this advantage is not statistically different between cabinet and noncabinet legacies. They further that cabinet legacies hold an approximately 8 percentage point advantage over noncabinet legacies in cabinet selection. In proposing potential mechanisms, they focus on an informational advantage held by cabinet legacies and suggest that networking helps explain part of this advantage.  
+
+While Smith and Martin (2017) distance themselves from judging the impacts of dynastic rule, there is ample - but divided - literature on the topic. Using economic data from India, Eapen George and Ponattu (2017) estiamte that dynastic rule tends to slow economic growth within each dynastic constituency, worsen the provision of public goods across constitutencies, and heighten ethnic polarization among voters. This evidence goes against the common refrain that members of political dynasties are better at legislating because of a greater familiarity with the political system. Indeed, it may be the case that dynasties lead to worse governance. Tusalem and Pe-Aguirre (2013) conclude through their analysis of dynasties in the Philippines that provinces dominated by dynasties tend to spend money less effectively on infrastructure and health than other provinces, while they also have more crime and unemployment. Most strikingly, even though the presence of dynasties tends to incude higher levels of congressional earmarks, dynasties spend the money less effectively than their counterparts.  
 
 That said, there is reason to believe dynasties can be normatively beneficial. Lacriox et al (2019) analyze the French Parliament during the initial stages of World War Two and find that members of dynasties were significantly more pro-democratic in their voting records than non-dynasties. However, there were striking disparities between dynasties, leading the authors to conclude that there exist separate types of dynasties, each with their own goals toward coalescing power. While dynasties founded by or filled by members of a pro-democratic party (or non-affiliated members who openly supported a democratic France) tended to defend democratic rights, other dynasties acted no more democratic than non-dynasties.  
 
-## Why Ireland? (and a Review of Electoral Literature) 
+### Why Ireland? (and a Review of Electoral Literature) 
 
-Ireland is an interesting case study to examine the impact of mostly exogenous covariates (dynastic status and local experience) on winning election. Its electoral system is classified as a proportional representation-based single transferable vote. Proportional representation (PR). Single transferable vote (STV) . These two factors come together to create a very candidate-based process that I argue better allows us to identify how voters act according to their preferences. In a first-past-the-post system like the United States, there are many conflicting factors like ideology that make it tougher to discern voter preferences. For instance, liberal voters who would prefer to vote for a man rather than a woman faced a challenge in the 2016 Presidential Election because their ideological preferences did not match their gender heuristic. However, in a system where parties nominate multiple candidates or the parties are not as ideologically opposed, voters have more leeway to make decisions based on their own personal preferences.  
+Ireland is an interesting case study to examine the impact of mostly exogenous covariates (dynastic status and local experience) on winning election. Its electoral system is classified as a proportional representation-based single transferable vote. Broadly speaking, proportional representation (PR) refers to an electoral system in which different parties gain seats in the legislature at a rate consistent with their vote shares. Proportional representation can happen under a variety of different voting methods, but Ireland uses a single transferable vote (STV). In most PR systems, voters cast their ballots and the seats are apportioned according to the national vote share. Conversely, STV maintains local elections by essentially conducting PR within each district. In Ireland, this goal is accomplished by having multimember districts: districts that send more than one representative to the Dail (Irish legislature).  
 
-Reynolds (1999) comments on the variation in gender equality by electoral system. A first-past-the-post structure with single-member districts encourages parties to put forward candidates they feel have majority support, which can disincentivize fielding women or minorities. On the other hand, systems with proportional representation or multimember districts incentivize parties to nominate more diverse slates of candidates to maximize the chances of winning the most seats. In other words, when parties can win multiple seats, they can cater different candidates to different voter bases.  
+These two factors come together to create a very candidate-based process that I argue better allows us to identify how voters act according to their preferences. In a first-past-the-post system like the United States, there are many conflicting factors like ideology that make it tougher to discern voter preferences. For instance, liberal voters who would prefer to vote for a man rather than a woman faced a challenge in the 2016 Presidential Election because their ideological preferences did not match their gender heuristic. However, in a system where parties nominate multiple candidates or the parties are not as ideologically opposed, voters have more leeway to make decisions based on their own personal preferences.  
+
+While Ireland's major parties were born out of an ideological dispute over secession, they have grown relatively close ideologically in recent decades. Fine Gael (FG) and Fianna Fáil (FF) both have their roots in the debate over the Anglo-Irish Treaty of 1921 that ended the Irish War of Independence. The leaders of what became FG were in favor of this treaty, while members of FF were staunchly opposed to it. Whereas in many countries, ideology determines the first split between parties, the fact that Ireland's parties diverged over a treaty opened the possibility that they would converge in the future. While there exist ideological parties in Ireland, they do not hold the same power FG and FF do, as one of these parties has been in the governing coalition for every Dail in the post-World War II era.  
+
+Ireland's electoral system may have impacts on equality of gender representation. Reynolds (1999) comments on the variation in gender equality by electoral system. A first-past-the-post structure with single-member districts encourages parties to put forward candidates they feel have majority support, which can disincentivize fielding women or minorities. On the other hand, systems with proportional representation or multimember districts incentivize parties to nominate more diverse slates of candidates to maximize the chances of winning the most seats. In other words, when parties can win multiple seats, they can cater different candidates to different voter bases.  
 
 However, focusing only on the electoral systems ignores the roles of party leaders. Kunovich and Paxton (2005) dig deeper into the gender dynamics at play in this setting. They argue that in proportional systems, greater female leadership on the party level will translate into more female *candidates* in proportional systems, but only in non-proportional systems will female leadership have a direct effect on *successful* candidates. This is because when faced with a potentially sexist electorate, the party primary process in non-proportional, single-member systems has a gatekeeper effect that allows party leaders to circumvent voter preferences by influencing the nomination process to certain candidates' advantage. Paired with ideological differences between parties, the end result is a voter base that seemingly does not have any choice but to vote for a candidate they find distasteful on the basis of race, gender, orientation, religion, etc. This phenomenon provides an alternate pathway for greater gender equality in representation in non-proportional systems, but for the purposes of this project, it highlights that Ireland's electoral systems uniquely and directly expose voter preferences in ways that other systems do not. For this reason, even if a similar candidate dataset existed for the United States, Ireland may still be a useful case.  
 
-```{r setup, include=FALSE, cache=TRUE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 # I load in three libraries. The first, lfe, allows me to regress using absorbed
@@ -406,7 +418,9 @@ There are some tables and figures that could not be replicated. There was no rep
 
 Those exceptions aside, Smith and Martin (2017)'s results replicate well. There were two major hurdles in replication: translating Stata code and managing multiple graphs. I was able to recreate most of the figures and tables using the `ggplot2` and `stargazer` libraries, respectively. However, the majority of the replication code focused on cleaning the candidate dataset and adding new variables. Using the `tidyverse`, I was able to condense some of the hard-coding relative to the amount used in Stata. The foremost example of this was when the authors added regional data (to create regional fixed effects). In Stata, the authors had to individually assign each district to a region, but by using the `case_when` function, I was able to assign multiple districts to a single region, which cut down the workload by a decent amount. The second hurdle was multiple graphs within the same figure. The majority of the authors' figures were comprised of three bar graphs, mostly reporting summaries of different attributes along the legacy scale. While there exist ways to save multiple graphs within the same figure, I decided it was best to keep each individual call for `ggplot` separate in case I wanted to call one graph and not another in the final paper.  
 
-### Figures  
+I will focus on the authors' first figure, along with tables 3 and 5.  
+
+### Figure 1
 
 ```{r fig1, echo=FALSE, cache=TRUE}
 
@@ -466,232 +480,15 @@ f1 <- f1 %>%
   ggtitle("Figure 1. Politician Legacy Proportions", subtitle = "In the Republic of Ireland, 1944-2016") +
   guides(fill=guide_legend(title="Legacy Type"))
 
-```
-
-```{r figdata, echo=FALSE, cache=TRUE}
-
-# A lot of the figures rely on the same subset of data.
-# I create that new data here. This data is the csv data but
-# only looking at candidates who at one point won election.
-
-figdata <- csv_data %>% 
-  filter(ever_elected == 1)
+f1
 
 ```
 
-```{r fig2, echo=FALSE, cache=TRUE}
 
-# Figure 2 (and 3 and 4) look at attribute data prior to election.
-# Unlike Figure 1, they are not stacked bar plots. This makes things
-# a bit easier when wrangling data. All I have to do is create the proper
-# percentages before calling for ggplot. Keep in mind that in the paper 
-# and in this replication, many of these figures are multiple graphs.
+Smith and Martin (2017)'s first figure demonstrates the magnitude of political dynasties in Irish politics. While over 80% of candidates 
 
-f2_local <- figdata %>% 
-  filter(!is.na(prelocal)) %>% 
-  count(legacyname, prelocal) %>% 
-  spread(prelocal, n) %>% 
-  mutate(per_local = `1`/(`1`+`0`)) %>% 
-  select(legacyname, per_local)
 
-f2_seanad <- figdata %>% 
-  filter(!is.na(preseanad)) %>% 
-  count(legacyname, preseanad) %>% 
-  spread(preseanad, n) %>% 
-  mutate(per_seanad = `1`/(`1`+`0`)) %>% 
-  select(legacyname, per_seanad)
-
-f2_offprof <- figdata %>% 
-  filter(!is.na(offprof)) %>% 
-  count(legacyname, offprof) %>% 
-  spread(offprof, n) %>% 
-  mutate(per_offprof = `1`/(`1`+`0`)) %>% 
-  select(legacyname, per_offprof)
-
-# I call ggplot three times to create the three displayed graphs.
-
-f2_1 <- ggplot(f2_local, aes(x=legacyname, y=per_local, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 2. Pre-Electoral Experience (Local)", subtitle = "Sorted by Legacy Status")
-
-f2_2 <- ggplot(f2_seanad, aes(x=legacyname, y=per_seanad, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 2. Pre-Electoral Experience (Seanad)", subtitle = "Sorted by Legacy Status")
-
-f2_3 <- ggplot(f2_offprof, aes(x=legacyname, y=per_offprof, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 2. Pre-Electoral Experience (Professional)", subtitle = "Sorted by Legacy Status")
-
-```
-
-```{r fig3, echo=FALSE, cache=TRUE}
-
-# Whereas Figure 2 looked at experience data, Figure 3 looks at demographic
-# data. I do the same data wrangling process as for Figure 2.
-
-f3_female <- figdata %>% 
-  filter(!is.na(female)) %>% 
-  count(legacyname, female) %>% 
-  spread(female, n) %>% 
-  mutate(per_female = `1`/(`1`+`0`)) %>% 
-  select(legacyname, per_female)
-
-f3_first_age <- figdata %>% 
-  filter(!is.na(first_age)) %>% 
-  group_by(legacyname) %>% 
-  summarize(avg_first_age = mean(first_age)) %>% 
-  select(legacyname, avg_first_age)
-
-f3_localborn <- figdata %>% 
-  filter(!is.na(localborn)) %>% 
-  count(legacyname, localborn) %>% 
-  spread(localborn, n) %>% 
-  mutate(per_localborn = `1`/(`1`+`0`)) %>% 
-  select(legacyname, per_localborn)
-
-# Then I just call three ggplots and display the results.
-
-f3_1 <- ggplot(f3_female, aes(x=legacyname, y=per_female, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 3. Pre-Electoral Demographics (Female)", subtitle = "Sorted by Legacy Status")
-
-f3_2 <- ggplot(f3_first_age, aes(x=legacyname, y=avg_first_age, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 3. Pre-Electoral Demographics (Age at First Election)", subtitle = "Sorted by Legacy Status")
-
-f3_3 <- ggplot(f3_localborn, aes(x=legacyname, y=per_localborn, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 3. Pre-Electoral Demographics (Local Born)", subtitle = "Sorted by Legacy Status")
-
-```
-
-```{r fig4, echo=FALSE, cache=TRUE}
-
-# Figure 4 looks at the same pre-electoral attribute data, but focusing on 
-# education. I do the same commands to data wrangle.
-
-f4_postsec <- figdata %>% 
-  filter(!is.na(educode2)) %>% 
-  count(legacyname, educode2) %>% 
-  spread(educode2, n) %>% 
-  mutate(per_postsec = `2`/(`1`+`2`+`3`)) %>% 
-  select(legacyname, per_postsec)
-
-f4_postgrad <- figdata %>% 
-  filter(!is.na(educode2)) %>% 
-  count(legacyname, educode2) %>% 
-  spread(educode2, n) %>% 
-  mutate(per_postgrad = `3`/(`1`+`2`+`3`)) %>% 
-  select(legacyname, per_postgrad)
-
-f4_ucd <- figdata %>% 
-  filter(!is.na(ucd)) %>% 
-  count(legacyname, ucd) %>% 
-  spread(ucd, n) %>% 
-  mutate(per_ucd = `1`/(`1`+`0`)) %>% 
-  select(legacyname, per_ucd)
-
-f4_feeschool <- figdata %>% 
-  filter(!is.na(feeschool)) %>% 
-  count(legacyname, feeschool) %>% 
-  spread(feeschool, n) %>% 
-  mutate(per_feeschool = `1`/(`1`+`0`)) %>% 
-  select(legacyname, per_feeschool)
-
-# Then I call ggplot four times to display the four layers of output.
-
-f4_1 <- ggplot(f4_postsec, aes(x=legacyname, y=per_postsec, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 4. Pre-Electoral Education (Postsecondary Education)", subtitle = "Sorted by Legacy Status")
-
-f4_2 <- ggplot(f4_postgrad, aes(x=legacyname, y=per_postgrad, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 4. Pre-Electoral Education (Postgraduate Degree)", subtitle = "Sorted by Legacy Status")
-
-f4_3 <- ggplot(f4_ucd, aes(x=legacyname, y=per_ucd, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 4. Pre-Electoral Education (UCD)", subtitle = "Sorted by Legacy Status")
-
-f4_4 <- ggplot(f4_feeschool, aes(x=legacyname, y=per_feeschool, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 4. Pre-Electoral Education (Fee School)", subtitle = "Sorted by Legacy Status")
-
-```
-
-```{r fig6, echo=FALSE, cache=TRUE}
-
-# Figure 6 contrasts cabinet and noncabinet legacies through legacy
-# attributes (generation number, sharing the same name/district as
-# the predecessor in the dynasty). Generation is shown as the number,
-# while same name and same district are shown in percentage form.
-
-fig6data <- figdata %>% 
-  filter(pre_mp == 1,
-         legacyscale != 0)
-
-f6_generation <- fig6data %>% 
-  filter(!is.na(generation)) %>% 
-  group_by(legacyname) %>% 
-  summarize(avg_generation = mean(generation)) %>% 
-  select(legacyname, avg_generation)
-
-f6_samename <- fig6data %>% 
-  filter(!is.na(samename)) %>% 
-  count(legacyname, samename) %>% 
-  spread(samename, n) %>% 
-  mutate(per_samename = `1`/(`1`+`0`)) %>% 
-  select(legacyname, per_samename)
-
-f6_samedistrict <- fig6data %>% 
-  filter(!is.na(samedistrict)) %>% 
-  count(legacyname, samedistrict) %>% 
-  spread(samedistrict, n) %>% 
-  mutate(per_samedistrict = `1`/(`1`+`0`)) %>% 
-  select(legacyname, per_samedistrict)
-
-# I call three ggplots to display the output.
-
-f6_1 <- ggplot(f6_generation, aes(x=legacyname, y=avg_generation, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 6. Strength of the Dynasty (Generation)", subtitle = "Sorted by Legacy Status")
-
-f6_2 <- ggplot(f6_samename, aes(x=legacyname, y=per_samename, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 6. Strength of the Dynasty (Same Name)", subtitle = "Sorted by Legacy Status")
-
-f6_3 <- ggplot(f6_samedistrict, aes(x=legacyname, y=per_samedistrict, fill=legacyname)) + 
-  geom_bar(stat="identity") + 
-  xlab("") +
-  ylab("") +
-  ggtitle("Figure 6. Strength of the Dynasty (Same District)", subtitle = "Sorted by Legacy Status")
-
-```
-
-### Tables  
+### Table 3  
 
 ```{r t3, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
@@ -734,40 +531,7 @@ t3 <- stargazer(t3_1, t3_2, t3_4,
 
 ```
 
-```{r t4, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
-
-# Table 4 looks at the electoral advantage of legacy, but with quota share
-# as the measured output variable. quotashare is the proportion of the Droop
-# Quota (used in multimember districts to determine who wins) met by the 
-# candidate's first preference votes.
-
-# Model 1 is simply legacy's impact on quota achieved.
-
-t4_1 <- felm(quotashare ~ as.factor(legacyscale), csv_data)
-
-# Model 2 is similar to Model 1 but with party-year fixed effects.
-
-t4_2 <- felm(quotashare ~ as.factor(legacyscale) | party_year, csv_data)
-
-# Model 3 is the same as Model 1 but with district-year fixed effects.
-
-t4_3 <- felm(quotashare ~ as.factor(legacyscale) | dist_year, csv_data)
-
-# Model 4 adds being female and being a first-time candidate to Model 2.
-
-t4_4 <- felm(quotashare ~ as.factor(legacyscale) + female + firstrun | party_year, csv_data)
-
-# Model 5 is the same as Model 4, but with district-year fixed effects.
-
-t4_5 <- felm(quotashare ~ as.factor(legacyscale) + female + firstrun | dist_year, csv_data)
-
-# I display the output with stargazer.
-
-t4 <- stargazer(t4_1, t4_2, t4_3, t4_4, t4_5,
-          title = "Table 4. The Electoral Advantage of Legacy: Share of Quota",
-          header = FALSE)
-
-```
+### Table 5
 
 ```{r t5, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
@@ -810,6 +574,389 @@ t5 <- stargazer(t5_1, t5_3, t5_4, t5_5,
 
 ```
 
+## Extension  
+
+I will extend Smith and Martin (2017) in two ways: analyzing the gendered effect of dynasties on winning election and looking at the effect of another potentially gendered covariate, local experience, on winning election.  
+
+### Gendered Effect of Dynasty  
+
+Smith and Martin (2017) note that "legacies of both types are more likely to be women, which suggests that dynasties may be a significant pathway into politics for female candidate in an otherwise male-dominated parliament" (p. 151). This observation inspired me to dig deeper into the gendered effects of being in a political dynasty. Does being in a dynasty help female candidates counteract the gender gap in winning elections?  
+
+To answer this question, I manipulated the Smith and Martin (2017) dataset to include a binary varible, `dynasty`, that was coded 1 if the candidate qualified as a dynasty. I then regressed election result on that and the candidate's sex. I ended up with three models: one that had no fixed effects, one that used the party-year fixed effects from Smith and Martin (2017), and one that used the authors' district-year fixed effects. That output is below in Table E1.  
+
+That said, it must be mentioned that this analysis is not unique. After creating my models, I found that one of the co-authors of the initial paper, Daniel Smith, currently has a working paper that studies this same topic with a similar dataset using approximately the same modeling technique. As a result, this portion of the extension should be characterized as a replication of Folke, Rickne, and Smith (2017) since, while I did not know it at the time, they were the first to flesh out this idea. This portion of the extension also serves as a replication of Folke, Rickne, and Smith (2017) who, with a similar dataset to Smith and Martin (2017), question whether there is a gender-specific impact to being a legacy in terms of winning election.  
+
+The major difference between my analysis and Folke, Rickne, and Smith (2017) is that they restrict their sample to Ireland's three largest parties (Fianna Fáil, Fine Gael, and Labour). They justify this decision because those parties have been consistently nominating candidates in most districts. However, I think the results should still hold without subsetting the data in this fashion because (a) there is still a model that creates party-year fixed effects and (b) since Ireland's electoral system places an emphasis on individual candidates, it should not necessarily matter that a party was consistently nominating in each district.  
+
+
+```{r extension 1, echo=FALSE, warning=FALSE, results='asis'}
+
+te1_1 <- felm(result ~ female*dynasty, data=csv_data)
+
+te1_2 <- felm(result ~ female*dynasty | party_dail, data=csv_data)
+
+te1_3 <- felm(result ~ female*dynasty | dist_year, data=csv_data)
+
+te1 <- stargazer(te1_1, te1_2, te1_3,
+                 title = "Table E1: Gendered Effect of Dynasty",
+                 header=FALSE,
+                 add.lines = list(c("Fixed Effects?", "No", "Party-Year", "District-Year")),
+                 covariate.labels = c("Female",
+                                      "Dynasty",
+                                      "Female * Dynasty"),
+                 dep.var.caption = "Dependent Variable:",
+                 dep.var.labels = "Election Result")
+```
+
+
+### Gendered Effect of Local Experience  
+
+I then wondered whether other covariates could have differing effects by gender. I thought local political experience was an interesting covariate to study because there seem to be two schools of thought surrounding its gendered effects.  
+
+The first is pessimistic. Okimoto and Brescoll (2010) observe that female candidates seen as ambitious are punished by voters, while male candidates seen in a similar light are not penalized. Excluding a general "feeling" potential voters could get after meeting a candidate face-to-face or watching them in a debate, local experience seems to be the best signal for ambition available to study. While the overall effect of holding local office is positive for men, the effect for women would be expected to be diminished or even negative if the "ambition hypothesis" holds.  
+
+The second possibility is more optimistic about the effect of local experience on female representation, even though it relies on a sexist electorate. Survey data from Fox (2003) demonstrates that fewer women run for office than men because they are more pessimistic about their qualifications. Additionally, research from Huddy and Terkildsen (1993) suggests that female candidates are held to a higher standard than male candidates in elections. It follows, then, that local experience can both incentivize better female candidates to run and give them the extra qualifications necessary to beat male candidates. In fact, if the assumptions prove true, female candidates should gain more benefit from local experience than male candidates do since the electorate seemingly demands more qualifications from women before voting them into office. As a result, the effect of women holding local office should counteract the gender gap.  
+
+To determine which of these hypotheses most accurately reflected the data, I recreated the models from the first extension and applied them to the interaction between candidate sex and local political experience. Again, three models were created: one without fixed effects, one taking party-year effects into account, and one taking district-year effects into account. As in the first extension, I did not subset the data to only include the major parties. The results of the models are summarized below in Table E2.  
+
+```{r extension 2, echo=FALSE, warning=FALSE, results='asis'}
+
+te2_1 <- felm(result ~ female*local, data=csv_data)
+
+te2_2 <- felm(result ~ female*local | party_dail, data=csv_data)
+
+te2_3 <- felm(result ~ female*local | dist_year, data=csv_data)
+
+te2 <- stargazer(te2_1, te2_2, te2_3,
+                 title = "Table E2: Gendered Effect of Local Experience",
+                 header=FALSE,
+                 add.lines = list(c("Fixed Effects?", "No", "Party-Year", "District-Year")),
+                 covariate.labels = c("Female",
+                                      "Local Experience",
+                                      "Female * Local Experience"),
+                 dep.var.caption = "Dependent Variable:",
+                 dep.var.labels = "Election Result")
+```
+
+## Discussion
+
+Smith and Martin (2017)'s results successfully replicate when translated into R. Political legacies indeed hold an electoral advantage over nonlegacies worth over 35 percentage points, and cabinet legacies have around an 8 point advantage over noncabinet legacies in cabinet promotion. The exact mechanism behind this advantage remains unclear and is a topic for future research. I extended Smith and Martin (2017) in two ways. The first analyzed at the impact of political dynasties on gender representation. The second looked at another potential covariate, local political experience, and its gender-specific effects. Similar to Folke, Rickne, and Smith (2017), I found that dynastic membership almost entirely counteracts the gender gap in winning elections and that this interaction is significant at the 0.01 level. For local experience, the results are more mixed. While the interaction between gender and local experience is significant at the 0.05 level as a whole and under district-year fixed effects, the relationship is no longer significant when using party-year fixed effects. Even at its peak, this interaction only makes up for half of the gender gap, suggesting that nominating local figures may not be enough to achieve equitable representation. This topic as a whole should be studied using other cases in the future.  
+
+\newpage
+
+## Appendix  
+
+Below are the figures and tables included in Smith and Martin (2017) that I chose not to display in the "Replication" portion of the paper.  
+
+### Figures
+
+```{r figdata, echo=FALSE, cache=TRUE}
+
+# A lot of the figures rely on the same subset of data.
+# I create that new data here. This data is the csv data but
+# only looking at candidates who at one point won election.
+
+figdata <- csv_data %>% 
+  filter(ever_elected == 1)
+
+```
+
+```{r fig2, echo=FALSE, cache=TRUE}
+
+# Figure 2 (and 3 and 4) look at attribute data prior to election.
+# Unlike Figure 1, they are not stacked bar plots. This makes things
+# a bit easier when wrangling data. All I have to do is create the proper
+# percentages before calling for ggplot. Keep in mind that in the paper 
+# and in this replication, many of these figures are multiple graphs.
+
+f2_local <- figdata %>% 
+  filter(!is.na(prelocal)) %>% 
+  count(legacyname, prelocal) %>% 
+  spread(prelocal, n) %>% 
+  mutate(per_local = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_local)
+
+f2_seanad <- figdata %>% 
+  filter(!is.na(preseanad)) %>% 
+  count(legacyname, preseanad) %>% 
+  spread(preseanad, n) %>% 
+  mutate(per_seanad = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_seanad)
+
+f2_offprof <- figdata %>% 
+  filter(!is.na(offprof)) %>% 
+  count(legacyname, offprof) %>% 
+  spread(offprof, n) %>% 
+  mutate(per_offprof = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_offprof)
+
+# I call ggplot three times and assign each plot to hide until needed.
+
+f2_1 <- ggplot(f2_local, aes(x=legacyname, y=per_local, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 2. Pre-Electoral Experience (Local)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+f2_2 <- ggplot(f2_seanad, aes(x=legacyname, y=per_seanad, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 2. Pre-Electoral Experience (Seanad)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+f2_3 <- ggplot(f2_offprof, aes(x=legacyname, y=per_offprof, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 2. Pre-Electoral Experience (Professional)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+# I call for each plot in the appendix.
+
+f2_1
+f2_2
+f2_3
+
+```
+
+```{r fig3, echo=FALSE, cache=TRUE}
+
+# Whereas Figure 2 looked at experience data, Figure 3 looks at demographic
+# data. I do the same data wrangling process as for Figure 2.
+
+f3_female <- figdata %>% 
+  filter(!is.na(female)) %>% 
+  count(legacyname, female) %>% 
+  spread(female, n) %>% 
+  mutate(per_female = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_female)
+
+f3_first_age <- figdata %>% 
+  filter(!is.na(first_age)) %>% 
+  group_by(legacyname) %>% 
+  summarize(avg_first_age = mean(first_age)) %>% 
+  select(legacyname, avg_first_age)
+
+f3_localborn <- figdata %>% 
+  filter(!is.na(localborn)) %>% 
+  count(legacyname, localborn) %>% 
+  spread(localborn, n) %>% 
+  mutate(per_localborn = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_localborn)
+
+# Then I assign each plot to f3_1, f3_2, and f3_3. This lets me
+# hide the output until needed.
+
+f3_1 <- ggplot(f3_female, aes(x=legacyname, y=per_female, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 3. Pre-Electoral Demographics (Female)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+f3_2 <- ggplot(f3_first_age, aes(x=legacyname, y=avg_first_age, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 3. Pre-Electoral Demographics (Age at First Election)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+f3_3 <- ggplot(f3_localborn, aes(x=legacyname, y=per_localborn, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 3. Pre-Electoral Demographics (Local Born)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+# I call for each figure now that this chunk is in the appendix.
+
+f3_1
+f3_2
+f3_3
+
+```
+
+```{r fig4, echo=FALSE, cache=TRUE}
+
+# Figure 4 looks at the same pre-electoral attribute data, but focusing on
+# education. I do the same commands to data wrangle.
+
+f4_postsec <- figdata %>% 
+  filter(!is.na(educode2)) %>% 
+  count(legacyname, educode2) %>% 
+  spread(educode2, n) %>% 
+  mutate(per_postsec = `2`/(`1`+`2`+`3`)) %>% 
+  select(legacyname, per_postsec)
+
+f4_postgrad <- figdata %>% 
+  filter(!is.na(educode2)) %>% 
+  count(legacyname, educode2) %>% 
+  spread(educode2, n) %>% 
+  mutate(per_postgrad = `3`/(`1`+`2`+`3`)) %>% 
+  select(legacyname, per_postgrad)
+
+f4_ucd <- figdata %>% 
+  filter(!is.na(ucd)) %>% 
+  count(legacyname, ucd) %>% 
+  spread(ucd, n) %>% 
+  mutate(per_ucd = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_ucd)
+
+f4_feeschool <- figdata %>% 
+  filter(!is.na(feeschool)) %>% 
+  count(legacyname, feeschool) %>% 
+  spread(feeschool, n) %>% 
+  mutate(per_feeschool = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_feeschool)
+
+# I create four ggplots and assign them in case I want the output to be
+# hidden.
+
+f4_1 <- ggplot(f4_postsec, aes(x=legacyname, y=per_postsec, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 4. Pre-Electoral Education (Postsecondary Education)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+f4_2 <- ggplot(f4_postgrad, aes(x=legacyname, y=per_postgrad, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 4. Pre-Electoral Education (Postgraduate Degree)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+f4_3 <- ggplot(f4_ucd, aes(x=legacyname, y=per_ucd, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 4. Pre-Electoral Education (UCD)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+f4_4 <- ggplot(f4_feeschool, aes(x=legacyname, y=per_feeschool, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 4. Pre-Electoral Education (Fee School)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+# I call for each figure now that it is located in the appendix.
+
+f4_1
+f4_2
+f4_3
+f4_4
+
+```
+
+```{r fig6, echo=FALSE, cache=TRUE}
+
+# Figure 6 contrasts cabinet and noncabinet legacies through legacy
+# attributes (generation number, sharing the same name/district as
+# the predecessor in the dynasty). Generation is shown as the number,
+# while same name and same district are shown in percentage form.
+
+fig6data <- figdata %>% 
+  filter(pre_mp == 1,
+         legacyscale != 0)
+
+f6_generation <- fig6data %>% 
+  filter(!is.na(generation)) %>% 
+  group_by(legacyname) %>% 
+  summarize(avg_generation = mean(generation)) %>% 
+  select(legacyname, avg_generation)
+
+f6_samename <- fig6data %>% 
+  filter(!is.na(samename)) %>% 
+  count(legacyname, samename) %>% 
+  spread(samename, n) %>% 
+  mutate(per_samename = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_samename)
+
+f6_samedistrict <- fig6data %>% 
+  filter(!is.na(samedistrict)) %>% 
+  count(legacyname, samedistrict) %>% 
+  spread(samedistrict, n) %>% 
+  mutate(per_samedistrict = `1`/(`1`+`0`)) %>% 
+  select(legacyname, per_samedistrict)
+
+# I assign three ggplots to hide the output until needed.
+
+f6_1 <- ggplot(f6_generation, aes(x=legacyname, y=avg_generation, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 6. Strength of the Dynasty (Generation)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+f6_2 <- ggplot(f6_samename, aes(x=legacyname, y=per_samename, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 6. Strength of the Dynasty (Same Name)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+f6_3 <- ggplot(f6_samedistrict, aes(x=legacyname, y=per_samedistrict, fill=legacyname)) + 
+  geom_bar(stat="identity") + 
+  xlab("") +
+  ylab("") +
+  ggtitle("Figure 6. Strength of the Dynasty (Same District)", subtitle = "Sorted by Legacy Status") +
+  guides(fill=guide_legend(title="Legacy Type"))
+
+# I call for each figure in the appendix.
+
+f6_1
+f6_2
+f6_3
+
+```
+
+\newpage
+
+### Tables
+
+```{r t4, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
+
+# Table 4 looks at the electoral advantage of legacy, but with quota share
+# as the measured output variable. quotashare is the proportion of the Droop
+# Quota (used in multimember districts to determine who wins) met by the 
+# candidate's first preference votes.
+
+# Model 1 is simply legacy's impact on quota achieved.
+
+t4_1 <- felm(quotashare ~ as.factor(legacyscale), csv_data)
+
+# Model 2 is similar to Model 1 but with party-year fixed effects.
+
+t4_2 <- felm(quotashare ~ as.factor(legacyscale) | party_year, csv_data)
+
+# Model 3 is the same as Model 1 but with district-year fixed effects.
+
+t4_3 <- felm(quotashare ~ as.factor(legacyscale) | dist_year, csv_data)
+
+# Model 4 adds being female and being a first-time candidate to Model 2.
+
+t4_4 <- felm(quotashare ~ as.factor(legacyscale) + female + firstrun | party_year, csv_data)
+
+# Model 5 is the same as Model 4, but with district-year fixed effects.
+
+t4_5 <- felm(quotashare ~ as.factor(legacyscale) + female + firstrun | dist_year, csv_data)
+
+# I use stargazer to generate the table. To save space, I do not report
+# the first model that does not include any fixed effects.
+
+t4 <- stargazer(t4_2, t4_3, t4_4, t4_5,
+          title = "Table 4. The Electoral Advantage of Legacy: Share of Quota",
+          header = FALSE,
+          covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Female", "First-time Candidate"),
+          dep.var.labels = "Share of Quota",
+          omit.stat = "rsq",
+          add.lines = list(c("Party-Year Fixed Effects?", "Yes", "No", "Yes", "No"), c("District-Year FE?", "No", "Yes", "No", "Yes")))
+
+```
+
 ```{r t6, echo=FALSE, warning=FALSE, cache=TRUE, results='asis'}
 
 # Table 6 looks at what makes dynasties strong. The output variable is still
@@ -838,7 +985,11 @@ t6_3 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 + samedistrict |
 
 t6 <- stargazer(t6_1, t6_2, t6_3,
           title = "Table 6. Unpacking the Informational Advantage: Strength of the Dynasty?",
-          header = FALSE)
+          header = FALSE,
+          covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Candidate Wins", "Candidate Wins Squared", "Generation Number", "Same Name?", "Same District?"),
+          dep.var.labels = "Cabinet Appointment",
+          omit.stat = "rsq",
+          add.lines = list(c("Party-Year Fixed Effects?", "Yes", "Yes", "Yes")))
 
 ```
 
@@ -862,96 +1013,38 @@ t7_2 <- felm(cabappt ~ as.factor(legacyscale) + cwins + cwins2 |
 
 t7 <- stargazer(t7_1, t7_2,
           title = "Table 7. Unpacking the Informational Advantage: Party Strongholds?",
-          header = FALSE)
+          header = FALSE,
+          covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Candidate Wins", "Candidate Wins Squared"),
+          dep.var.labels = "Cabinet Appointment",
+          omit.stat = "rsq",
+          add.lines = list(c("Party-Region-Year Fixed Effects?", "Yes", "Yes")))
 
 ```
 
-## Extension  
-
-I will extend Smith and Martin (2017) in two ways: analyzing the gendered effect of dynasties on winning election and looking at the effect of another potentially gendered covariate, local experience, on winning election.  
-
-### Gendered Effect of Dynasty  
-
-Smith and Martin (2017) note that "legacies of both types are more likely to be women, which suggests that dynasties may be a significant pathway into politics for female candidate in an otherwise male-dominated parliament" (p. 151). This observation inspired me to dig deeper into the gendered effects of being in a political dynasty. Does being in a dynasty help female candidates counteract the gender gap in winning elections?  
-
-To answer this question, I manipulated the Smith and Martin (2017) dataset to include a binary varible, `dynasty`, that was coded 1 if the candidate qualified as a dynasty. I then regressed election result on that and the candidate's sex. I ended up with three models: one that had no fixed effects, one that used the party-year fixed effects from Smith and Martin (2017), and one that used the authors' district-year fixed effects. That output is below in Table X.  
-
-That said, it must be mentioned that this analysis is not unique. After creating my models, I found that one of the co-authors of the initial paper, Daniel Smith, currently has a working paper that studies this same topic with a similar dataset using approximately the same modeling technique. As a result, this portion of the extension should be characterized as a replication of Folke, Rickne, and Smith (2017) since, while I did not know it at the time, they were the first to flesh out this idea. This portion of the extension also serves as a replication of Folke, Rickne, and Smith (2017) who, with a similar dataset to Smith and Martin (2017), question whether there is a gender-specific impact to being a legacy in terms of winning election.  
-
-The major difference between my analysis and Folke, Rickne, and Smith (2017) is that they restrict their sample to Ireland's three major parties (Fianna Fail, Fine Gael, and Labour). They justify this decision because those parties have been consistently nominating candidates in most districts. However, I think the results should still hold without subsetting the data in this fashion because (a) there is still a model that creates party-year fixed effects and (b) since Ireland's electoral system places an emphasis on individual candidates, it should not necessarily matter that a party was consistently nominating in each district.  
-
-```{r extension 1, echo=FALSE, warning=FALSE, results='asis'}
-
-library(lfe)
-library(stargazer)
-
-te1_1 <- felm(result ~ female*dynasty, data=csv_data)
-
-te1_2 <- felm(result ~ female*dynasty | party_dail, data=csv_data)
-
-te1_3 <- felm(result ~ female*dynasty | dist_year, data=csv_data)
-
-te1 <- stargazer(te1_1, te1_2, te1_3,
-                 title = "Table X: Gendered Effect of Dynasty",
-                 header=FALSE,
-                 add.lines = list(c("Fixed Effects?", "No", "Party-Year", "District-Year")),
-                 covariate.labels = c("Female",
-                                      "Dynasty",
-                                      "Female * Dynasty"),
-                 dep.var.caption = "Dependent Variable:",
-                 dep.var.labels = "Election Result")
-```
-
-
-### Gendered Effect of Local Experience  
-
-I then wondered whether other covariates could have differing effects by gender. I thought local political experience was an interesting covariate to study because there seem to be two schools of thought surrounding its gendered effects.  
-
-The first is pessimistic. Okimoto and Brescoll (2010) observe that female candidates seen as ambitious are punished by voters, while male candidates seen in a similar light are not penalized. Excluding a general "feeling" potential voters could get after meeting a candidate face-to-face or watching them in a debate, local experience seems to be the best signal for ambition available to study. While the overall effect of holding local office is positive for men, the effect for women would be expected to be diminished or even negative if the "ambition hypothesis" holds.  
-
-The second possibility is more optimistic about the effect of local experience on female representation, even though it relies on a sexist electorate. Survey data from Fox (2003) demonstrates that fewer women run for office than men because they are more pessimistic about their qualifications. Additionally, research from Huddy and Terkildsen (1993) suggests that female candidates are held to a higher standard than male candidates in elections. It follows, then, that local experience can both incentivize better female candidates to run and give them the extra qualifications necessary to beat male candidates. In fact, if the assumptions prove true, female candidates should gain more benefit from local experience than male candidates do since the electorate seemingly demands more qualifications from women before voting them into office. As a result, the effect of women holding local office should counteract the gender gap.  
-
-To determine which of these hypotheses most accurately reflected the data, I recreated the models from the first extension and applied them to the interaction between candidate sex and local political experience. Again, three models were created: one without fixed effects, one taking party-year effects into account, and one taking district-year effects into account. As in the first extension, I did not subset the data to only include the major parties. The results of the models are summarized below in Table X.  
-
-```{r extension 2, echo=FALSE, warning=FALSE, results='asis'}
-
-te2_1 <- felm(result ~ female*local, data=csv_data)
-
-te2_2 <- felm(result ~ female*local | party_dail, data=csv_data)
-
-te2_3 <- felm(result ~ female*local | dist_year, data=csv_data)
-
-te2 <- stargazer(te2_1, te2_2, te2_3,
-                 title = "Table Y: Gendered Effect of Local Experience",
-                 header=FALSE,
-                 add.lines = list(c("Fixed Effects?", "No", "Party-Year", "District-Year")),
-                 covariate.labels = c("Female",
-                                      "Local Experience",
-                                      "Female * Local Experience"),
-                 dep.var.caption = "Dependent Variable:",
-                 dep.var.labels = "Election Result")
-```
-
-
-## Appendix  
-
-Below are the figures and tables included in Smith and Martin (2017) that I chose not to display in the "Replication" portion of the paper.  
-
-```{r}
-
-```
-
+\newpage
 
 ## References  
 
-Folke, O., Rickne, J., and Smith, D. (2017). Gender and dynastic political recruitment. *Research Institute of*
+Eapen George, S., and Ponattu, D. (2017). Understanding the economic impacts of political dynasties: Evidence from India. *Unviersity of Mannheim*. Retrieved from tufts.edu
 
-\    *Industrial Economics*. Retrieved from ifn.se
+Folke, O., Rickne, J., and Smith, D. (2017). Gender and dynastic political recruitment. *Research Institute of Industrial Economics*. Retrieved from ifn.se
 
-Smith, D., and Martin, S. (2017). Political dynasties and the selection of cabinet ministers. *Legislative* 
+Fox, R. (2003). Gender, political ambition, and the decision not to run for office. Union College. Retrieved from cawp.rutgers.edu
 
-\    *Studies Quarterly 42*(1). Retrieved from wiley.com
+Hlavac, M. (2018). stargazer: Well-formatted regression and summary statistics tables. R package version 5.2.2. Retrieved from CRAN.R-project.org
 
-Smith, D., and Martin, S. (2017). Replication data for: Political dynasties and the selection of cabinet 
+Huddy, L., and Terkildsen, N. (1993). The consequences of gender stereotypes for women candidates at different levels and types of office. Political Research Quarterly 46(3). pp. 503-525.
 
-\    ministers. *Harvard Dataverse*. Retrieved from dataverse.harvard.edu
+Kunovich, S., and Paxton, P. (2005). Pathways to power: The role of political parties in women’s national political representation. American Journal of Sociology 111(2). pp. 505-52
+
+Lacroix, J., et al. (2019). A positive effect of political dynasties: The case of France's 1940 enabling act. *Université libre de Bruxelles*. Retrieved from aeaweb.org
+
+Okimoto, T., and Brescoll, V. (2010). The price of power: Power seeking and backlash against female politicians. Personality and Social Psychology Bulletin 36(7). pp. 923-36.
+
+Reynolds, A. (1999). Women in the legislatures and executives of the world: Knocking at the highest glass ceiling. World Politics 51(4). pp. 547-72.
+
+Smith, D., and Martin, S. (2017). Political dynasties and the selection of cabinet ministers. *Legislative Studies Quarterly 42*(1). Retrieved from wiley.com
+
+Smith, D., and Martin, S. (2017). Replication data for: Political dynasties and the selection of cabinet ministers. *Harvard Dataverse*. Retrieved from dataverse.harvard.edu
+
+Tusalem, R., and Pe-Aguirre, J. (2013). The effect of political dynasties on effective democratic governance: Evidence from the Philippines. *Asian Politics & Policy 5*(3). Retrieved from wiley.com
