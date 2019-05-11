@@ -26,9 +26,12 @@ Gov 1006 Final Paper
 April 31, 2019
 \end{flushright}
 
-## Abstract  
+\vspace{10mm}
 
-In this project, I analyze Smith and Martin (2017)'s "Political Dynasties and the Selection of Cabinet Ministers". I begin by replicating Smith and Martin (2017)'s figures and tables. While some of this output cannot be replicated due to missing data or the inability to reproduce in R (the authors used Stata), I find similar results to the authors in what was producible. From there, I extend the results by using their dataset to analyze the gendered impact of two covariates, dynasty and local experience, on winning election.  
+\begin{abstract}
+In this project, I analyze Smith and Martin (2017)'s "Political Dynasties and the Selection of Cabinet Ministers". I begin by replicating Smith and Martin (2017)'s figures and tables. While some of this output cannot be replicated due to missing data or the inability to reproduce in R (the authors used Stata), I find similar results to the authors in what was producible. From there, I extend the results by using their dataset to analyze the gendered impact of two covariates, dynasty and local experience, on winning election. I conclude that there are significant gender-based effects of dynasty and local experience that may help female candidates with these attributes overcome the gender gap in winning elections. 
+\end{abstract}
+\newpage
 
 ## Introduction  
 
@@ -42,7 +45,7 @@ In this paper, I begin by introducing Smith and Martin (2017). After reviewing t
 
 ### Political Dynasties
 
-Daniel Smith and Shane Martin (2017) analyze the interaction of these political dynasties in cabinet formation. Their goals are threefold: closely survey the electoral advantage legacies hold over nonlegacies, judge whether cabinet legacies - whose predecessors served in cabinet - have an advantage in progressing into cabinet over noncabinet legacies, and dissect the potential mechanisms behind this effect. To accomplish this, the authors work with a candidate-level dataset of Irish politicians encompassing all legislative candidates from 1918-2016 (*n = 11670*). The authors then clean this data and restrict the sample to 1944-2016 to both account for instability surrounding the independence movement and allow for dynasties to develop. They find that legacies indeed hold an electoral advantage over nonlegacies equal to over 35 percentage points, but that this advantage is not statistically different between cabinet and noncabinet legacies. They further that cabinet legacies hold an approximately 8 percentage point advantage over noncabinet legacies in cabinet selection. In proposing potential mechanisms, they focus on an informational advantage held by cabinet legacies and suggest that networking helps explain part of this advantage.  
+Daniel Smith and Shane Martin (2017) analyze the interaction of these political dynasties in cabinet formation. Their goals are threefold: closely survey the electoral advantage legacies hold over nonlegacies, judge whether cabinet legacies - whose predecessors served in cabinet - have an advantage in progressing into cabinet over noncabinet legacies, and dissect the potential mechanisms behind this effect. To accomplish this, the authors work with a candidate-level dataset of Irish politicians encompassing all legislative candidates from 1918-2016 (*n = 11670*), which is described in detail in the "Data" section. They find that legacies indeed hold an electoral advantage over nonlegacies equal to over 35 percentage points, but that this advantage is not statistically different between cabinet and noncabinet legacies. They further that cabinet legacies hold an approximately 8 percentage point advantage over noncabinet legacies in cabinet selection. In proposing potential mechanisms, they focus on an informational advantage held by cabinet legacies and suggest that networking helps explain part of this advantage.  
 
 While Smith and Martin (2017) distance themselves from judging the impacts of dynastic rule, there is ample - but divided - literature on the topic. Using economic data from India, Eapen George and Ponattu (2017) estimate that dynastic rule tends to slow economic growth within each dynastic constituency, worsen the provision of public goods across constituencies, and heighten ethnic polarization among voters. This evidence goes against the common refrain that members of political dynasties are better at legislating because of a greater familiarity with the political system. Indeed, it may be the case that dynasties lead to worse governance. Tusalem and Pe-Aguirre (2013) conclude through their analysis of dynasties in the Philippines that provinces dominated by dynasties tend to spend money less effectively on infrastructure and health than other provinces, while they also have more crime and unemployment. Most strikingly, even though the presence of dynasties tends to include higher levels of congressional earmarks, dynasties spend the money less effectively than their counterparts.  
 
@@ -50,15 +53,19 @@ That said, there is reason to believe dynasties can be normatively beneficial. L
 
 ### Why Ireland? (and a Review of Electoral Literature) 
 
-Ireland is an interesting case study to examine the impact of mostly exogenous covariates (dynastic status and local experience) on winning election. Its electoral system is classified as a proportional representation-based single transferable vote. Broadly speaking, proportional representation (PR) refers to an electoral system in which different parties gain seats in the legislature at a rate consistent with their vote shares. Proportional representation can happen under a variety of different voting methods, but Ireland uses a single transferable vote (STV). In most PR systems, voters cast their ballots and the seats are apportioned according to the national vote share. Conversely, STV maintains local elections by essentially conducting PR within each district. In Ireland, this goal is accomplished by having multimember districts: districts that send more than one representative to the Dail (Irish legislature).  
+Ireland is an interesting case study to examine the impact of mostly exogenous covariates (dynastic status and local experience) on winning election. Its electoral system is classified as a proportional representation-based single transferable vote. Broadly speaking, proportional representation (PR) refers to an electoral system in which different parties gain seats in the legislature at a rate consistent with their vote shares. Proportional representation can happen under a variety of different voting methods, but Ireland uses a single transferable vote (STV). In most PR systems, voters cast their ballots and the seats are apportioned according to the national vote share. Conversely, STV maintains local elections by essentially conducting PR within each district. In Ireland, this goal is accomplished by having multimember districts: districts that send more than one representative to the Dáil (Irish legislature).  
 
 These two factors come together to create a very candidate-based process that I argue better allows us to identify how voters act according to their preferences. In a first-past-the-post system like the United States, there are many conflicting factors like ideology that make it tougher to discern voter preferences. For instance, liberal voters who would prefer to vote for a man rather than a woman faced a challenge in the 2016 Presidential Election because their ideological preferences did not match their gender heuristic. However, in a system where parties nominate multiple candidates or the parties are not as ideologically opposed, voters have more leeway to make decisions based on their own personal preferences.  
 
-While Ireland's major parties were born out of an ideological dispute over secession, they have grown relatively close ideologically in recent decades. Fine Gael (FG) and Fianna Fáil (FF) both have their roots in the debate over the Anglo-Irish Treaty of 1921 that ended the Irish War of Independence. The leaders of what became FG were in favor of this treaty, while members of FF were staunchly opposed to it. Whereas in many countries, ideology determines the first split between parties, the fact that Ireland's parties diverged over a treaty opened the possibility that they would converge in the future. While there exist ideological parties in Ireland, they do not hold the same power FG and FF do, as one of these parties has been in the governing coalition for every Dail in the post-World War II era.  
+While Ireland's major parties were born out of an ideological dispute over secession, they have grown relatively close ideologically in recent decades. Fine Gael (FG) and Fianna Fáil (FF) both have their roots in the debate over the Anglo-Irish Treaty of 1921 that ended the Irish War of Independence. The leaders of what became FG were in favor of this treaty, while members of FF were staunchly opposed to it. Whereas in many countries, ideology determines the first split between parties, the fact that Ireland's parties diverged over a treaty opened the possibility that they would converge in the future. While there exist ideological parties in Ireland, they do not hold the same power FG and FF do, as one of these parties has been in the governing coalition for every Dáil in the post-World War II era.  
 
 Ireland's electoral system may have impacts on equality of gender representation. Reynolds (1999) comments on the variation in gender equality by electoral system. A first-past-the-post structure with single-member districts encourages parties to put forward candidates they feel have majority support, which can disincentivize fielding women or minorities. On the other hand, systems with proportional representation or multimember districts incentivize parties to nominate more diverse slates of candidates to maximize the chances of winning the most seats. In other words, when parties can win multiple seats, they can cater different candidates to different voter bases.  
 
 However, focusing only on the electoral systems ignores the roles of party leaders. Kunovich and Paxton (2005) dig deeper into the gender dynamics at play in this setting. They argue that in proportional systems, greater female leadership on the party level will translate into more female *candidates* in proportional systems, but only in non-proportional systems will female leadership have a direct effect on *successful* candidates. This is because when faced with a potentially sexist electorate, the party primary process in non-proportional, single-member systems has a gatekeeper effect that allows party leaders to circumvent voter preferences by influencing the nomination process to certain candidates' advantage. Paired with ideological differences between parties, the end result is a voter base that seemingly does not have any choice but to vote for a candidate they find distasteful on the basis of race, gender, orientation, religion, etc. This phenomenon provides an alternate pathway for greater gender equality in representation in non-proportional systems, but for the purposes of this project, it highlights that Ireland's electoral systems uniquely and directly expose voter preferences in ways that other systems do not. For this reason, even if a similar candidate dataset existed for the United States, Ireland may still be a useful case.  
+
+## Data
+
+Smith and Martin (2017) use historical election data to compile a unique dataset of all candidates for the Irish legislature from 1918-2016. To account for instability following the independence movement, the authors restrict their sample to 1944-2016. The dataset includes electoral, historical, and demographic information. The electoral information includes the binary result of each election and the vote-share each candidate achieved in their respective district. The historical information includes each candidates’ history within the district: whether they held local office before running, how many times they ran, and how many times they were successful. The demographic information includes age, gender, education level, alma mater, and family information that indicates whether the candidate is a part of a political dynasty. The authors clean the dataset and add new variables like region to create the fixed effects they use in modeling dynastic impacts.  
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -79,7 +86,6 @@ library(tidyverse)
 csv_data <- read_csv("Smith-Martin-Replication-Data/IRELAND-CANDIDATES.csv")
 
 ```
-
 
 ```{r data cleaning, echo=FALSE, cache=TRUE}
 
@@ -410,9 +416,11 @@ csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabin
 
 ## Replication  
 
+!!! TAKE OUT TALK OF CODING AND R AND PACKAGES!!!
+
 Smith and Martin (2017) use Stata to create the 7 tables and 6 figures in the paper. As a result, my output does not perfectly match their paper cosmetically. That said, the results are mostly the same. It is entirely possible, though, that using `ggplot2` makes the figures look better and that some of the regression coefficients are off on the hundredths digit and beyond.  
 
-There are some tables and figures that could not be replicated. There was no replication code for Tables 1 and 2 in the Stata code. As a result, I did not attempt to replicate this portion of the paper. Table 1 is a list of the cabinets and governing parties in Ireland from 1944-2016. The cabinets, dates in office, and governing parties are not given in the data, although it would theoretically be possible to figure out whether Fianna Fail or Fine Gael had a majority in the Dail based on which party won more seats in the most recent election. However, the cabinet and Prime Minister would not be able to be determined from this data, so I left it untouched. Table 2 is a Stata summary table of the family relationships and generations among candidates and TDs. While this table is replicable in R, since the code to create it was not included, I decided to focus on replicating the other tables and figures. The figure not included in this replication is Figure 5, which was used to help explain the informational advantage by analyzing several different controls of experience, demographics, and education. This type of coefficient plot is possible in R, but getting the results to directly match the one in the paper was not possible (and would have looked too disjointed to include).  
+There are some tables and figures that could not be replicated. There was no replication code for Tables 1 and 2 in the Stata code. As a result, I did not attempt to replicate this portion of the paper. Table 1 is a list of the cabinets and governing parties in Ireland from 1944-2016. The cabinets, dates in office, and governing parties are not given in the data, although it would theoretically be possible to figure out whether Fianna Fail or Fine Gael had a majority in the Dáil based on which party won more seats in the most recent election. However, the cabinet and Prime Minister would not be able to be determined from this data, so I left it untouched. Table 2 is a Stata summary table of the family relationships and generations among candidates and TDs. While this table is replicable in R, since the code to create it was not included, I decided to focus on replicating the other tables and figures. The figure not included in this replication is Figure 5, which was used to help explain the informational advantage by analyzing several different controls of experience, demographics, and education. This type of coefficient plot is possible in R, but getting the results to directly match the one in the paper was not possible (and would have looked too disjointed to include).  
 
 Those exceptions aside, Smith and Martin (2017)'s results replicate well. There were two major hurdles in replication: translating Stata code and managing multiple graphs. I was able to recreate most of the figures and tables using the `ggplot2` and `stargazer` libraries, respectively. However, the majority of the replication code focused on cleaning the candidate dataset and adding new variables. Using the `tidyverse`, I was able to condense some of the hard-coding relative to the amount used in Stata. The foremost example of this was when the authors added regional data (to create regional fixed effects). In Stata, the authors had to individually assign each district to a region, but by using the `case_when` function, I was able to assign multiple districts to a single region, which cut down the workload by a decent amount. The second hurdle was multiple graphs within the same figure. The majority of the authors' figures were comprised of three bar graphs, mostly reporting summaries of different attributes along the legacy scale. While there exist ways to save multiple graphs within the same figure, I decided it was best to keep each individual call for `ggplot` separate in case I wanted to call one graph and not another in the final paper.  
 
@@ -475,15 +483,16 @@ f1 <- f1 %>%
   geom_bar(stat="identity", position="fill") +
   xlab("") +
   ylab("Percent") +
-  ggtitle("Figure 1. Politician Legacy Proportions", subtitle = "In the Republic of Ireland, 1944-2016") +
-  guides(fill=guide_legend(title="Legacy Type"))
+  ggtitle("Figure 1. Proportions of Legacy Among Irish Politicians", subtitle = "1944-2016") +
+  guides(fill=guide_legend(title="Legacy Type")) +
+  labs(caption = "Note: Candidates ran for elections to the Irish Dáil between 1944-2016.")
 
 f1
 
 ```
 
 
-Smith and Martin (2017)'s first figure demonstrates the magnitude of political dynasties in Irish politics. While over 80% of candidates are not legacies, both types of legacies are disproportionately represented among TDs (elected members of the Dail), TDs in the governing coalition, and cabinet ministers. And, as an impetus for the paper, the reader notices that cabinet legacies are specifically overrepresented among cabinet ministers. This lends credence to the suggestion that cabinet legacies in particular have some sort of informational advantage over noncabinet legacies that results in them getting chosen at a higher rate. Regardless, Figure 1 shows that the overall magnitude of the legacy advantage is much higher in getting elected than in forming the governing coalition or becoming a cabinet minister, as both noncabinet and cabinet legacies comprise about a quarter of TDs, government TDs, and cabinet ministers. While this figure is primarily used to introduce the paper, I think it does a good job of highlighting the different dynamics at play.  
+Smith and Martin (2017)'s first figure demonstrates the magnitude of political dynasties in Irish politics. While over 80% of candidates are not legacies, both types of legacies are disproportionately represented among TDs (elected members of the Dáil), TDs in the governing coalition, and cabinet ministers. And, as an impetus for the paper, the reader notices that cabinet legacies are specifically overrepresented among cabinet ministers. This lends credence to the suggestion that cabinet legacies in particular have some sort of informational advantage over noncabinet legacies that results in them getting chosen at a higher rate. Regardless, Figure 1 shows that the overall magnitude of the legacy advantage is much higher in getting elected than in forming the governing coalition or becoming a cabinet minister, as both noncabinet and cabinet legacies comprise about a quarter of TDs, government TDs, and cabinet ministers. While this figure is primarily used to introduce the paper, I think it does a good job of highlighting the different dynamics at play.  
 
 
 ### Table 3  
@@ -525,13 +534,18 @@ t3 <- stargazer(t3_1, t3_2, t3_4,
           covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Female", "First Run"),
           dep.var.labels = "Election Result",
           omit.stat = "rsq",
-          add.lines = list(c("Party-Year Fixed Effects?", "No", "Yes", "Yes")))
+          add.lines = list(c("Party-Year Fixed Effects?", "No", "Yes", "Yes")),
+          notes = c("Dependent variable is a dummy variable for whether",
+                    "the candidate won election. Coefficients are",
+                    "estimates from a linear model. Standard errors in",
+                    "parentheses."),
+          notes.align = "l")
 
 ```
 
-Table 3 analyzes the electoral advantage legacies hold over nonlegacies. While this phenomenon is taken for granted at the onset of the paper, Smith and Martin (2017) want to both quantify the effect and make sure that noncabinet and cabinet legacies enjoy the same advantage. If the effects between legacy type were significantly different, it could explain the divergence in cabinet selection by itself. Similar to the authors, I find a significant electoral advantage of legacies but no significant differences between legacy type. I quantify this advantage to be around 35 percentage points, which matches Smith and Martin (2017). This advantage decreases when party-year fixed effects are included, and shrinks even more when female candidates and first-time candidates are incorporated into the model. I left out the two models incorporating district-year fixed effects instead of party-year fixed effects to save space and not constrict the rest of the table. The results of those models match the magnitude of those in the paper, though, so it appears that district-year fixed effects replicate fairly well.  
+Table 3 analyzes the electoral advantage legacies hold over nonlegacies. While this phenomenon is taken for granted at the onset of the paper, Smith and Martin (2017) want to both quantify the effect and make sure that noncabinet and cabinet legacies enjoy the same advantage. If the effects between legacy type are significantly different, it could explain the divergence in cabinet selection by itself. Similar to the authors, I find a significant electoral advantage of legacies but no significant differences between legacy type. I quantify this advantage to be around 35 percentage points, which matches Smith and Martin (2017). This advantage decreases when party-year fixed effects are included, and shrinks even more when female candidates and first-time candidates are incorporated into the model. I leave out the two models incorporating district-year fixed effects instead of party-year fixed effects to save space and not constrict the rest of the table. The results of those models match the magnitude of those in the paper, though, so it appears that district-year fixed effects replicate fairly well.  
 
-The table does deviate from the one published in Smith and Martin (2017). While the first model - without any fixed effects - has the same coefficients, the standard errors are slightly off. This may be due to differences between how R calculates its standard errors and how Stata reports "robust" standard errors. Models 2 and 3 in the replication report slightly different coefficients and standard errors from the corresponding models in the paper. This may be due to how party-year fixed effects models were constructed. I replicated their process as best I could using R, but it is possible that the absorption of fixed effects worked differently in R or that the creation of the fixed effects themselves was done in a different way. Either way, the magnitude and significance of the results remains the same.  
+The table does deviate from the one published in Smith and Martin (2017). While the first model - without any fixed effects - has the same coefficients, the standard errors are slightly off. This may be due to differences between how R and Stata calculate standard errors. Models 2 and 3 in the replication report slightly different coefficients and standard errors from the corresponding models in the paper. These differences may also be due to slight differences between R and Stata. Regardless of these minor discrepencies, the magnitude and significance of the results remain the same.  
 
 ### Table 5
 
@@ -572,7 +586,12 @@ t5 <- stargazer(t5_1, t5_3, t5_4, t5_5,
           dep.var.labels = "Cabinet Appointment",
           omit.stat = "rsq",
           add.lines = list(c("Party-Year Fixed Effects?", "No", "Yes", "Yes", "Yes")),
-          header = FALSE)
+          header = FALSE,
+          notes = c("Dependent variable is a dummy variable for whether",
+                    "the candidate was appointed to cabinet. Coefficients",
+                    "are estimates from a linear model. Standard errors in",
+                    "parentheses."),
+          notes.align = "l")
 
 ```
 
@@ -588,13 +607,13 @@ I extend Smith and Martin (2017) in two ways: analyzing the gendered effect of d
 
 Smith and Martin (2017) note that "legacies of both types are more likely to be women, which suggests that dynasties may be a significant pathway into politics for female candidate in an otherwise male-dominated parliament" (p. 151). This observation inspired me to dig deeper into the gendered effects of being in a political dynasty. Does being in a dynasty help female candidates counteract the gender gap in winning elections?  
 
-To answer this question, I manipulated the Smith and Martin (2017) dataset to include a binary variable, `dynasty`, that was coded 1 if the candidate qualified as a dynasty. I then regressed election result on that and the candidate's sex. I ended up with three models: one that had no fixed effects, one that used the party-year fixed effects from Smith and Martin (2017), and one that used the authors' district-year fixed effects. That output is below in Table E1.  
+To answer this question, I manipulate the Smith and Martin (2017) dataset to include a binary variable, `dynasty`, that is coded 1 if the candidate qualified as a dynasty. I then regress election result on that and the candidate's sex. I end up with three models: one that has no fixed effects, one that uses the party-year fixed effects from Smith and Martin (2017), and one that uses the authors' district-year fixed effects. That output is below in Table E1.  
 
 Model 1 regresses election result on gender, a binary dynasty variable, and the interaction between gender and dynasty. There are no fixed effects in this model. I find a disadvantage of female non-legacy candidates of 18 percentage points, but the interaction variable suggests that female legacies counteract that disadvantage with a positive gender-legacy effect of 12 percentage points, cutting the gender gap to only 6 percentage points. As would be expected with Table 5, the advantage of male legacies is 36 percentage points. All of these covariates are significant at the 0.01 level.  
 
 Model 2 regresses the same variables as Model 1 and includes party-year fixed effects. It again finds significant effects of gender and dynastic membership, but now the interaction between gender and dynasty is not significant at the .1 level. Model 3, which uses district-year fixed effects, has a significant interaction at the 0.1 level that cuts the gender gap by more than half.  
 
-That said, it must be mentioned that this analysis is not unique. After creating my models, I found that one of the co-authors of the initial paper, Daniel Smith, currently has a working paper that studies this same topic with a similar dataset using approximately the same modeling technique. As a result, this portion of the extension could also be characterized as a replication of Folke, Rickne, and Smith (2017) since, while I did not know it at the time, they were the first to flesh out this idea. They do not account for fixed effects in their models, though, leaving them with a significant interaction variable at the 0.01 level like in Model 1.   
+This part of the paper, while an extension on Smith and Martin (2017), is not fully unique. After creating my models, I found that Daniel Smith currently has a working paper studying the same topic with the Irish candidate dataset using similar modeling techniques. As a result, this portion of the extension is also a replication of Folke, Rickne, and Smith (2017). They do not account for fixed effects in their models, which allows them to conclude a significant interaction variable at the 0.01 level (as seen in Model 1), while I can only conclude signficance at the 0.1 level after taking the district-year fixed effects into account.  
 
 The major methodological difference between my analysis and Folke, Rickne, and Smith (2017) is that they restrict their sample to Ireland's three largest parties (Fianna Fáil, Fine Gael, and Labour). They justify this decision because those parties have been consistently nominating candidates in most districts. However, I think the results should still hold without subsetting the data in this fashion because (a) there is still a model that creates party-year fixed effects and (b) since Ireland's electoral system places an emphasis on individual candidates, it should not necessarily matter that a party was consistently nominating in each district.  
 
@@ -615,19 +634,24 @@ te1 <- stargazer(te1_1, te1_2, te1_3,
                                       "Dynasty",
                                       "Female * Dynasty"),
                  dep.var.caption = "Dependent Variable:",
-                 dep.var.labels = "Election Result")
+                 dep.var.labels = "Election Result",
+          notes = c("Dependent variable is a dummy variable for whether",
+                    "the candidate won election. Coefficients are",
+                    "estimates from a linear model. Standard errors in",
+                    "parentheses."),
+          notes.align = "l")
 ```
 
 
 ### Gendered Effect of Local Experience  
 
-I then wondered whether other covariates could have differing effects by gender. I thought local political experience was an interesting covariate to study because there seem to be two schools of thought surrounding its gendered effects.  
+I then explore whether other covariates could have differing effects by gender. Local political experience is of special interest because there seem to be two diverging opinions surrounding its gendered effects.  
 
 The first is pessimistic. Okimoto and Brescoll (2010) observe that female candidates seen as ambitious are punished by voters, while male candidates seen in a similar light are not penalized. Excluding a general "feeling" potential voters could get after meeting a candidate face-to-face or watching them in a debate, local experience seems to be the best signal for ambition available to study. While the overall effect of holding local office is positive for men, the effect for women would be expected to be diminished or even negative if the "ambition hypothesis" holds.  
 
 The second possibility is more optimistic about the effect of local experience on female representation, even though it relies on a sexist electorate. Survey data from Fox (2003) demonstrates that fewer women run for office than men because they are more pessimistic about their qualifications. Additionally, research from Huddy and Terkildsen (1993) suggests that female candidates are held to a higher standard than male candidates in elections. It follows, then, that local experience can both incentivize better female candidates to run and give them the extra qualifications necessary to beat male candidates. In fact, if the assumptions prove true, female candidates should gain more benefit from local experience than male candidates do since the electorate seemingly demands more qualifications from women before voting them into office. As a result, the effect of women holding local office should counteract the gender gap.  
 
-To determine which of these hypotheses most accurately reflected the data, I recreated the models from the first extension and applied them to the interaction between candidate sex and local political experience. Again, three models were created: one without fixed effects, one taking party-year effects into account, and one taking district-year effects into account. As in the first extension, I did not subset the data to only include the major parties. The results of the models are summarized below in Table E2.  
+To determine which of these hypotheses most accurately reflect the data, I recreate the models from the first extension and apply them to the interaction between candidate sex and local political experience. Again, I create three models: one without fixed effects, one taking party-year effects into account, and one taking district-year effects into account. As in the first extension, I do not subset the data to only include the major parties. The results of the models are summarized below in Table E2.  
 
 ```{r extension 2, echo=FALSE, warning=FALSE, results='asis'}
 
@@ -645,7 +669,12 @@ te2 <- stargazer(te2_1, te2_2, te2_3,
                                       "Local Experience",
                                       "Female * Local Experience"),
                  dep.var.caption = "Dependent Variable:",
-                 dep.var.labels = "Election Result")
+                 dep.var.labels = "Election Result",
+          notes = c("Dependent variable is a dummy variable for whether",
+                    "the candidate won election. Coefficients are",
+                    "estimates from a linear model. Standard errors in",
+                    "parentheses."),
+          notes.align = "l")
 ```
 
 Model 1 regresses election result on candidate gender, local political experience, and the interaction between those variables. There are no fixed effects. The gender gap is estimated to be 24 percentage points, and the benefit to local experience for a male candidate is estimated to be 15 percentage points. The interaction variable, which measures the unique effect of local experience for female candidates, is worth 10 percentage points. This interaction helps female candidates with local experience make up less than half of the gender gap. I find gender and local experience to be significant at the 0.01 level, and the interaction is significant at the 0.05 level.  
@@ -654,13 +683,13 @@ Models 2 and 3 both incorporate fixed effects. In model 2, which uses party-year
 
 ## Discussion
 
-Smith and Martin (2017)'s results successfully replicate when translated into R. Political legacies indeed hold an electoral advantage over nonlegacies worth over 35 percentage points, and cabinet legacies have around an 8 point advantage over noncabinet legacies in cabinet promotion. The exact mechanism behind this advantage remains unclear and is a topic for future research. I extended Smith and Martin (2017) in two ways. The first analyzed at the impact of political dynasties on gender representation. The second looked at another potential covariate, local political experience, and its gender-specific effects. Similar to Folke, Rickne, and Smith (2017), I found that dynastic membership almost entirely counteracts the gender gap in winning elections and that this interaction is significant at the 0.01 level. For local experience, the results are more mixed. While the interaction between gender and local experience is significant at the 0.05 level as a whole and under district-year fixed effects, the relationship is no longer significant when using party-year fixed effects. Even at its peak, this interaction only makes up for half of the gender gap, suggesting that nominating local figures may not be enough to achieve equitable representation. This topic as a whole should be studied using other cases in the future.  
+Smith and Martin (2017)'s results successfully replicate when translated into R. Political legacies indeed hold an electoral advantage over nonlegacies worth over 35 percentage points, and cabinet legacies have around an 8 point advantage over noncabinet legacies in cabinet promotion. The exact mechanism behind this advantage remains unclear and is a topic for future research. I extend Smith and Martin (2017) in two ways. The first analyzes the impact of political dynasties on gender representation. The second looks at another potential covariate, local political experience, and its gender-specific effects. Similar to Folke, Rickne, and Smith (2017), I find that dynastic membership almost entirely counteracts the gender gap in winning elections and that this interaction is significant at the 0.01 level. For local experience, the results are more mixed. While the interaction between gender and local experience is significant at the 0.05 level as a whole and under district-year fixed effects, the relationship is no longer significant when using party-year fixed effects. Even at its peak, this interaction only makes up for half of the gender gap, suggesting that nominating local figures may not be enough to achieve equitable representation. Some suggestions for future research include replicating the paper in Stata. More importantly, however, would be seeing if these results replicate using logistic regression, since election result and cabinet appointment are both binary variables. As a whole, research into other cases besides Ireland would help benefit the literature and further the development of a overarching theory of dynasty and equitable representation.  
 
 \newpage
 
 ## Appendix  
 
-Below are the figures and tables included in Smith and Martin (2017) that I chose not to display in the "Replication" portion of the paper.  
+Below are the figures and tables included in Smith and Martin (2017) that I choose not to display in the "Replication" portion of the paper.  
 
 ### Figures
 
@@ -967,7 +996,9 @@ t4 <- stargazer(t4_2, t4_3, t4_4, t4_5,
           covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Female", "First-time Candidate"),
           dep.var.labels = "Share of Quota",
           omit.stat = "rsq",
-          add.lines = list(c("Party-Year Fixed Effects?", "Yes", "No", "Yes", "No"), c("District-Year FE?", "No", "Yes", "No", "Yes")))
+          add.lines = list(c("Party-Year Fixed Effects?", "Yes", "No", "Yes", "No"), c("District-Year FE?", "No", "Yes", "No", "Yes")),
+          notes = c("Dependent variable is the proportion of the electoral quota reached", "by the candidate with his or her first preference votes. Coefficients are", "estimates from a linear model. Standard errors in parentheses."),
+          notes.align = "l")
 
 ```
 
@@ -1003,7 +1034,9 @@ t6 <- stargazer(t6_1, t6_2, t6_3,
           covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Candidate Wins", "Candidate Wins Squared", "Generation Number", "Same Name?", "Same District?"),
           dep.var.labels = "Cabinet Appointment",
           omit.stat = "rsq",
-          add.lines = list(c("Party-Year Fixed Effects?", "Yes", "Yes", "Yes")))
+          add.lines = list(c("Party-Year Fixed Effects?", "Yes", "Yes", "Yes")),
+          notes = c("Dependent variable is a dummy variable for whether the candidate was", "appointed to cabinet. Coefficients are estimates from a linear model.", "Standard errors in parentheses."),
+          notes.align = "l")
 
 ```
 
@@ -1031,7 +1064,9 @@ t7 <- stargazer(t7_1, t7_2,
           covariate.labels = c("Noncabinet Legacy", "Cabinet Legacy", "Candidate Wins", "Candidate Wins Squared"),
           dep.var.labels = "Cabinet Appointment",
           omit.stat = "rsq",
-          add.lines = list(c("Party-Region-Year Fixed Effects?", "Yes", "Yes")))
+          add.lines = list(c("Party-Region-Year Fixed Effects?", "Yes", "Yes")),
+          notes = c("Dependent variable is a dummy variable for whether the candidate was", "appointed to cabinet. Coefficients are estimates from a linear model.", "Standard errors in parentheses."),
+          notes.align = "l")
 
 ```
 
