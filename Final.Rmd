@@ -537,7 +537,7 @@ t3 <- stargazer(t3_1, t3_2, t3_4,
 
 Table 3 analyzes the electoral advantage legacies hold over nonlegacies. While this phenomenon is taken for granted at the onset of the paper, Smith and Martin (2017) want to both quantify the effect and make sure that noncabinet and cabinet legacies enjoy the same advantage. If the effects between legacy type are significantly different, it could explain the divergence in cabinet selection by itself. Similar to the authors, I find a significant electoral advantage of legacies but no significant differences between legacy type. I quantify this advantage to be around 35 percentage points, which matches Smith and Martin (2017). This advantage decreases when party-year fixed effects are included, and shrinks even more when female candidates and first-time candidates are incorporated into the model. I leave out the two models incorporating district-year fixed effects instead of party-year fixed effects to save space and not constrict the rest of the table. The results of those models match the magnitude of those in the paper, though, so it appears that district-year fixed effects replicate fairly well.  
 
-The table does deviate from the one published in Smith and Martin (2017). While the first model - without any fixed effects - has the same coefficients, the standard errors are slightly off. This may be due to differences between how R and Stata calculate standard errors. Models 2 and 3 in the replication report slightly different coefficients and standard errors from the corresponding models in the paper. These differences may also be due to slight differences between R and Stata. Regardless of these minor discrepencies, the magnitude and significance of the results remain the same.  
+The table does deviate from the one published in Smith and Martin (2017). While the first model - without any fixed effects - has the same coefficients, the standard errors are slightly off. This may be due to differences between how R and Stata calculate standard errors. Models 2 and 3 in the replication report slightly different coefficients and standard errors from the corresponding models in the paper. These differences may also be due to slight differences between R and Stata. Regardless of these minor discrepancies, the magnitude and significance of the results remain the same.  
 
 ### Table 5
 
@@ -605,7 +605,7 @@ Model 1 regresses election result on gender, a binary dynasty variable, and the 
 
 Model 2 regresses the same variables as Model 1 and includes party-year fixed effects. It again finds significant effects of gender and dynastic membership, but now the interaction between gender and dynasty is not significant at the .1 level. Model 3, which uses district-year fixed effects, has a significant interaction at the 0.1 level that cuts the gender gap by more than half.  
 
-This part of the paper, while an extension on Smith and Martin (2017), is not fully unique. After creating my models, I found that Daniel Smith currently has a working paper studying the same topic with the Irish candidate dataset using similar modeling techniques. As a result, this portion of the extension is also a replication of Folke, Rickne, and Smith (2017). They do not account for fixed effects in their models, which allows them to conclude a significant interaction variable at the 0.01 level (as seen in Model 1), while I can only conclude signficance at the 0.1 level after taking the district-year fixed effects into account.  
+This part of the paper, while an extension on Smith and Martin (2017), is not fully unique. After creating my models, I found that Daniel Smith currently has a working paper studying the same topic with the Irish candidate dataset using similar modeling techniques. As a result, this portion of the extension is also a replication of Folke, Rickne, and Smith (2017). They do not account for fixed effects in their models, which allows them to conclude a significant interaction variable at the 0.01 level (as seen in Model 1), while I can only conclude significance at the 0.1 level after taking the district-year fixed effects into account.  
 
 The major methodological difference between my analysis and Folke, Rickne, and Smith (2017) is that they restrict their sample to Ireland's three largest parties (Fianna Fáil, Fine Gael, and Labour). They justify this decision because those parties have been consistently nominating candidates in most districts. However, I think the results should still hold without subsetting the data in this fashion because (a) there is still a model that creates party-year fixed effects and (b) since Ireland's electoral system places an emphasis on individual candidates, it should not necessarily matter that a party was consistently nominating in each district.  
 
@@ -1042,7 +1042,7 @@ t6 <- stargazer(t6_1, t6_2, t6_3,
 # analyzes whether region has an effect on the impact of legacy. Cabinet 
 # appointment is still the output variable.
 
-# Model 1 looks at the impat of legacy on cabinet appointment, with party-region
+# Model 1 looks at the impact of legacy on cabinet appointment, with party-region
 # fixed effects.
 
 t7_1 <- felm(cabappt ~ as.factor(legacyscale) | party_region_dail, csv_data)
@@ -1070,7 +1070,7 @@ t7 <- stargazer(t7_1, t7_2,
 
 ## References  
 
-Eapen George, S., and Ponattu, D. (2017). Understanding the economic impacts of political dynasties: Evidence from India. *Unviersity of Mannheim*. Retrieved from tufts.edu
+Eapen George, S., and Ponattu, D. (2017). Understanding the economic impacts of political dynasties: Evidence from India. *University of Mannheim*. Retrieved from tufts.edu
 
 Folke, O., Rickne, J., and Smith, D. (2017). Gender and dynastic political recruitment. *Research Institute of Industrial Economics*. Retrieved from ifn.se
 
