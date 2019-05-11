@@ -1,5 +1,5 @@
 ---
-title: "Dynastic Impacts on Electoral Outcomes"
+title: "Dynastic and Gendered Impacts on Electoral Outcomes"
 output:
   pdf_document: default
 subtitle: Replication and Extension of Smith and Martin (2017)
