@@ -19,7 +19,7 @@ This repo contains the following:
   * `IRELAND-CANDIDATES-Codebook.docx`, which lists and describes each variable in the above datasets
   * `Smith-Martin-2017-LSQ-Replication.do`, the Stata replication code
   * `Smith-Martin-2017-LSQ-Appendix.pdf`, the online appendix of the paper
-* `Presentation_figure`, which includes the figures for the Xaringan presentation
+* `Presentation-figure`, which includes the figures for the Xaringan presentation
 * `Presentation_files`, which includes the files for the Xaringan presentation
 * A `.gitignore` file
 * and `README.md`, which you are now finished reading
