@@ -23,7 +23,7 @@ Jack Schroeder
 
 Gov 1006 Final Paper
 
-April 31, 2019
+May 11, 2019
 \end{flushright}
 
 \vspace{10mm}
@@ -416,7 +416,7 @@ csv_data$legacyname <- fct_relevel(csv_data$legacyname, c("Nonlegacy", "Noncabin
 
 ## Replication  
 
-Smith and Martin (2017) use Stata to create the 7 tables and 6 figures in the paper. I translate their data into R and find similar results. There are some cosmetic changes due to different packages and techniques, but as a whole, I replicate their findings. There are two tables and one figure I do not replicate (the reasons why are explained in the Appendix). Those exceptions aside, Smith and Martin (2017)'s results replicate well. There were two major hurdles in replication explained in the Appendix. Here, I focus on the authors' first figure, along with tables 3 and 5.  
+Smith and Martin (2017) use Stata to create the 7 tables and 6 figures in the paper. I translate their data into R and find similar results. There are some cosmetic changes due to different packages and techniques, but as a whole, I replicate their findings. There are two tables and one figure I do not replicate (the reasons why are explained in the Appendix). Those exceptions aside, Smith and Martin (2017)'s results replicate well. I encounter two major hurdles in coding the replication that I outline in the Appendix. Here, I focus on explaining the significance the authors' first figure, along with tables 3 and 5.  
 
 ### Figure 1
 
